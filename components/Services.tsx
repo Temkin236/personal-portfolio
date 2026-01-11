@@ -2,9 +2,9 @@
 import React from 'react';
 
 const skills = [
-  { title: 'Agentic AI Systems', desc: 'Implementing autonomous swarms and self-correcting logic pipelines using LangGraph and Python.', tags: ['Python', 'LangChain', 'OpenAI'] },
-  { title: 'Full Stack Development', desc: 'Building responsive and performant web applications with modern ecosystems.', tags: ['React', 'Node.js', 'Tailwind', 'Go'] },
-  { title: 'Electronics & Hardware', desc: 'Expertise in Signal Processing, Embedded Systems, and IoT architecture stemming from ECE background.', tags: ['VHDL', 'RTOS', 'DSP', 'Arduino'] }
+  { title: 'Full Stack Development', desc: 'Crafting production-ready applications with React, Node.js, and Go. Focused on high-scale architecture and seamless user flows.', tags: ['React', 'Next.js', 'Go', 'PostgreSQL'] },
+  { title: 'Agentic AI & Data', desc: 'Specializing in autonomous AI agents and precision data annotation. Training and fine-tuning models for real-world reasoning.', tags: ['Python', 'LangGraph', 'Annotation', 'LLMs'] },
+  { title: 'UI/UX Design', desc: 'Developing a designer\'s eye. Focused on minimalist aesthetics, accessible interfaces, and professional Noir branding.', tags: ['Figma', 'Typography', 'Layouts', 'User Research'] }
 ];
 
 const Services: React.FC = () => {
@@ -15,10 +15,10 @@ const Services: React.FC = () => {
           <div className="lg:col-span-5 space-y-8">
             <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-neutral-600">03 // Technical Armory</h4>
             <h2 className="text-5xl sm:text-7xl font-heading font-bold leading-[0.9] tracking-tighter">
-              Polymathic <br /><span className="text-neutral-700 italic">Expertise.</span>
+              Software <br /><span className="text-neutral-700 italic">Expertise.</span>
             </h2>
             <p className="text-neutral-500 text-lg font-medium leading-relaxed">
-              Merging the mathematical rigor of Electronics Engineering with the cutting-edge adaptability of AI Swarms.
+              Merging <span className="text-white">Full Stack</span> mastery with the cutting-edge adaptability of AI agents and data-driven intelligence.
             </p>
           </div>
 

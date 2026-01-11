@@ -3,9 +3,9 @@ import React from 'react';
 import { Experience } from '../types';
 
 const experiences: Experience[] = [
-  { year: '2021 — 2025', role: 'B.Sc in Electronics & Communication', company: 'ASTU (Adama Science & Technology University)', description: '4th-year candidate. Specialized in Signal Processing, Embedded Systems, and AI-Hardware Integration.' },
-  { year: '2023 — Present', role: 'Core Member', company: 'CSEC ASTU', description: 'Driving software innovation within the Computer Science club. Lead on agentic logic and automation tasks.' },
-  { year: '2024 — Present', role: 'Agentic Systems Developer', company: 'Innovation Lab', description: 'Participating in global hackathons and developing autonomous data annotation pipelines.' }
+  { year: '2021 — 2025', role: 'Full Stack Engineering Focus', company: 'ASTU (ECE Foundation)', description: 'Leveraging Electronics principles to build high-performance software and autonomous agents.' },
+  { year: '2023 — Present', role: 'Core Software Lead', company: 'CSEC ASTU', description: 'Architecting scalable web solutions and automation tools for the university tech community.' },
+  { year: '2024 — Present', role: 'Data Annotation Specialist', company: 'AI Workflows', description: 'Designing high-precision annotation pipelines for fine-tuning large language models.' }
 ];
 
 const About: React.FC = () => {
@@ -22,17 +22,17 @@ const About: React.FC = () => {
                 <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-neutral-400">Biography</h4>
               </div>
               <h2 className="text-6xl sm:text-8xl font-heading font-bold text-black tracking-tighter leading-[0.85]">
-                Circuit to <br /><span className="text-neutral-200">Swarms.</span>
+                Logic to <br /><span className="text-neutral-200">Scale.</span>
               </h2>
             </div>
             <p className="text-xl text-neutral-500 leading-relaxed font-medium max-w-md">
-              My engineering foundation lies in <span className="text-black font-bold italic">Electronics & Communication</span>. I apply hardware-level precision to high-level <span className="text-black font-bold">Autonomous Intelligence</span>.
+              I am a <span className="text-black font-black">Full Stack Developer</span> with a core foundation as a <span className="italic">4th-year ECE candidate at ASTU</span>. I bridge the gap between complex hardware systems and elegant, user-centric software.
             </p>
             
             <div className="bg-neutral-50 p-6 rounded-3xl border border-neutral-100">
-               <p className="text-[9px] font-black uppercase text-neutral-400 tracking-[0.3em] mb-2">Institutional Anchor</p>
-               <p className="font-heading font-bold text-xl">ASTU - Ethiopia</p>
-               <p className="text-sm text-neutral-500 font-medium mt-1 italic">Building the next generation of ECE-driven AI solutions.</p>
+               <p className="text-[9px] font-black uppercase text-neutral-400 tracking-[0.3em] mb-2">Technical Base</p>
+               <p className="font-heading font-bold text-xl">Full Stack & Agentic AI</p>
+               <p className="text-sm text-neutral-500 font-medium mt-1 italic">Building the next generation of web-driven AI solutions.</p>
             </div>
           </div>
 

@@ -11,21 +11,21 @@ const Hero: React.FC = () => {
           <div className="space-y-6 lg:space-y-8">
             <div className="flex items-center gap-4 lg:gap-6 reveal active">
                 <div className="w-12 lg:w-16 h-[1px] bg-black"></div>
-                <h2 className="text-[10px] lg:text-[11px] font-black tracking-[0.5em] text-black uppercase">ASTU // ECE Engineer // Agentic AI Specialist</h2>
+                <h2 className="text-[10px] lg:text-[11px] font-black tracking-[0.5em] text-black uppercase">Software Engineering // Production Ready</h2>
             </div>
             <h1 className="text-[10vw] lg:text-[8.5rem] font-heading font-bold leading-[0.75] tracking-tighter text-black select-none group">
               TEMKIN<br />
               <span className="outline-text relative inline-block">
                 ABDULMELIK
-                <span className="absolute -top-4 -right-8 lg:-top-6 lg:-right-12 text-[12px] lg:text-[14px] tracking-widest font-black text-black opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">v2025.PRO</span>
+                <span className="absolute -top-4 -right-8 lg:-top-6 lg:-right-12 text-[12px] lg:text-[14px] tracking-widest font-black text-black opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">SOFTWARE ARCHITECT</span>
               </span>
             </h1>
           </div>
 
           <div className="flex flex-col sm:flex-row sm:items-center gap-10 lg:gap-14 reveal active">
-            <div className="max-w-md">
+            <div className="max-w-xl">
               <p className="text-neutral-500 text-lg lg:text-xl leading-relaxed font-medium">
-                4th-year candidate at <span className="text-black font-bold">ASTU</span>. Architecting autonomous intelligence and high-scale systems. Bridging <span className="text-black font-bold">Electronics & Communication</span> with agentic swarms.
+                I am a <span className="text-black font-black">Full Stack Developer</span>, <span className="text-black font-bold">Agentic AI Architect</span>, and <span className="text-black font-bold">Data Annotator</span>. Merging technical precision with a <span className="text-black font-bold italic">UI/UX beginner's</span> eye for modern aesthetics.
               </p>
             </div>
             <div className="flex flex-wrap gap-4">
@@ -50,11 +50,8 @@ const Hero: React.FC = () => {
                 (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop";
               }}
             />
-            {/* Professional tech scanline overlay */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-[length:100%_2px,3px_100%] pointer-events-none opacity-30"></div>
-            
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
-            
             <div className="absolute bottom-12 left-12 text-white z-10 space-y-2">
               <div className="flex items-center gap-3">
                  <div className="w-6 h-[1px] bg-white/40"></div>
@@ -62,15 +59,9 @@ const Hero: React.FC = () => {
               </div>
               <p className="font-heading font-bold text-3xl tracking-tighter">Temkin A.</p>
               <div className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full border border-white/10 inline-block">
-                <span className="text-[8px] font-black uppercase tracking-widest text-white/80">Active Verification: 2025</span>
+                <span className="text-[8px] font-black uppercase tracking-widest text-white/80">Dev Verified: 2025</span>
               </div>
             </div>
-            
-            {/* SVG Technical details */}
-            <svg className="absolute top-12 right-12 w-12 h-12 text-white/20" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 4" className="animate-spin-slow" />
-                <path d="M50 20 L50 80 M20 50 L80 50" stroke="currentColor" strokeWidth="0.5" />
-            </svg>
           </div>
         </div>
       </div>

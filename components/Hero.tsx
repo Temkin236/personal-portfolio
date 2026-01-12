@@ -1,5 +1,6 @@
 
 import React from 'react';
+import profilePic from '../assets/personalportfolio.jpg';
 
 const Hero: React.FC = () => {
   return (
@@ -43,7 +44,7 @@ const Hero: React.FC = () => {
         <div className="lg:col-span-4 relative hidden lg:block group">
           <div className="relative aspect-[3/4.2] overflow-hidden rounded-[5rem] bg-black shadow-[0_80px_130px_-20px_rgba(0,0,0,0.25)] ring-1 ring-neutral-200 transition-all duration-1000 group-hover:shadow-[0_100px_160px_-30px_rgba(0,0,0,0.4)]">
             <img 
-              src="https://images.unsplash.com/photo-1519085185758-2ad9790367c8?q=80&w=1974&auto=format&fit=crop" 
+              src={profilePic} 
               alt="Temkin Abdulmelik" 
               className="w-full h-full object-cover grayscale brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-[1500ms] ease-in-out scale-105 group-hover:scale-100"
               onError={(e) => {
@@ -53,14 +54,12 @@ const Hero: React.FC = () => {
             <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-[length:100%_2px,3px_100%] pointer-events-none opacity-30"></div>
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
             <div className="absolute bottom-12 left-12 text-white z-10 space-y-2">
-              <div className="flex items-center gap-3">
-                 <div className="w-6 h-[1px] bg-white/40"></div>
-                 <p className="text-[10px] font-black uppercase tracking-[0.5em] text-white/60">Profile v4.0</p>
-              </div>
-              <p className="font-heading font-bold text-3xl tracking-tighter">Temkin A.</p>
-              <div className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full border border-white/10 inline-block">
-                <span className="text-[8px] font-black uppercase tracking-widest text-white/80">Dev Verified: 2025</span>
-              </div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-6 h-[1px] bg-white/40"></div>
+                      <p className="text-[10px] font-black uppercase tracking-[0.5em] text-white/60">Profile v4.0</p>
+                    </div>
+                    <span className="text-[8px] font-black uppercase tracking-widest text-white/80">Dev Verified: 2025</span>
+            </div>
             </div>
           </div>
         </div>

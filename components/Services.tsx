@@ -4,7 +4,7 @@ import React from 'react';
 const skills = [
   { title: 'Full Stack Development', desc: 'Crafting production-ready applications with React, Node.js, and Go. Focused on high-scale architecture and seamless user flows.', tags: ['React', 'Next.js', 'Go', 'PostgreSQL'] },
   { title: 'Agentic AI & Data', desc: 'Specializing in autonomous AI agents and precision data annotation. Training and fine-tuning models for real-world reasoning.', tags: ['Python', 'LangGraph', 'Annotation', 'LLMs'] },
-  { title: 'UI/UX Design', desc: 'Developing a designer\'s eye. Focused on minimalist aesthetics, accessible interfaces, and professional Noir branding.', tags: ['Figma', 'Typography', 'Layouts', 'User Research'] }
+  { title: 'UI/UX Design', desc: 'Developing a designer\'s eye. Focused on minimalist aesthetics, accessible interfaces, and professional editorial branding.', tags: ['Figma', 'Typography', 'Layouts', 'User Research'] }
 ];
 
 const Services: React.FC = () => {

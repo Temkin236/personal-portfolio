@@ -17,12 +17,12 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
         <button 
           onClick={() => scrollTo('home')} 
           className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-full pr-4"
-          aria-label="Noir Home"
+          aria-label="Temkin Home"
         >
           <div className="w-8 h-8 lg:w-9 lg:h-9 bg-black rounded-full flex items-center justify-center transition-transform group-hover:scale-110 duration-500">
-            <span className="text-white font-black text-[12px]">N</span>
+            <span className="text-white font-black text-[12px]">T</span>
           </div>
-          <span className="font-heading font-bold text-xl lg:text-2xl tracking-tighter">NOIR</span>
+          <span className="font-heading font-bold text-xl lg:text-2xl tracking-tighter">Temkin</span>
         </button>
         
         {/* Connection Link */}

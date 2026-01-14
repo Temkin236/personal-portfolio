@@ -10,10 +10,10 @@ const experiences: Experience[] = [
 
 const About: React.FC = () => {
   return (
-    <div className="py-24 lg:py-48 px-6 lg:px-24 bg-white border-y border-neutral-100 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 lg:gap-32">
-          <div className="lg:col-span-5 space-y-16">
+    <div className="py-16 md:py-20 lg:py-32 px-6 sm:px-8 md:px-12 lg:px-24 xl:px-32 bg-white border-y border-neutral-100 overflow-hidden">
+      <div className="max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
+          <div className="lg:col-span-5 space-y-12">
             <div className="space-y-8">
               <div className="flex items-center gap-4">
                 <div className="w-8 h-8 rounded-full border border-black flex items-center justify-center">
@@ -21,11 +21,11 @@ const About: React.FC = () => {
                 </div>
                 <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-neutral-400">Biography</h4>
               </div>
-              <h2 className="text-6xl sm:text-8xl font-heading font-bold text-black tracking-tighter leading-[0.85]">
+              <h2 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-black tracking-tighter leading-tight">
                 Logic to <br /><span className="text-neutral-200">Scale.</span>
               </h2>
             </div>
-            <p className="text-xl text-neutral-500 leading-relaxed font-medium max-w-md">
+            <p className="text-lg md:text-xl text-neutral-500 leading-relaxed font-medium md:max-w-md lg:max-w-lg">
               I am a <span className="text-black font-black">Full Stack Developer</span> with a core foundation as a <span className="italic">4th-year ECE candidate at ASTU</span>. I bridge the gap between complex hardware systems and elegant, user-centric software.
             </p>
             
@@ -41,21 +41,26 @@ const About: React.FC = () => {
               <h4 className="text-[11px] font-black uppercase tracking-[0.5em] text-black">Chronology</h4>
               <div className="w-1.5 h-1.5 rounded-full bg-black"></div>
             </div>
-            <div className="divide-y divide-neutral-100">
-              {experiences.map((exp, idx) => (
-                <div key={idx} className="group py-12 lg:py-16 first:pt-0 last:pb-0">
-                  <div className="flex flex-col sm:flex-row justify-between gap-8">
-                    <div className="space-y-4">
-                      <span className="text-[10px] font-black text-neutral-300 uppercase tracking-widest">{exp.year}</span>
-                      <h3 className="text-3xl lg:text-4xl font-heading font-bold transition-transform duration-700 group-hover:translate-x-4">{exp.role}</h3>
-                      <p className="text-neutral-400 font-bold uppercase text-[10px] tracking-[0.3em]">{exp.company}</p>
+
+            <div className="relative mt-8">
+              <div className="hidden md:block absolute left-6 top-0 bottom-0 w-px bg-neutral-100"></div>
+              <div className="space-y-8">
+                {experiences.map((exp, idx) => (
+                  <div key={idx} className="group relative pl-0 md:pl-12 lg:pl-16">
+                    <div className="absolute md:left-2 lg:left-6 top-3 md:top-4 w-3 h-3 rounded-full bg-black"></div>
+
+                    <div className="md:ml-6">
+                      <span className="text-xs font-black text-neutral-300 uppercase tracking-widest">{exp.year}</span>
+                      <h3 className="text-2xl md:text-3xl lg:text-4xl font-heading font-bold transition-transform duration-500 group-hover:translate-x-3 mt-2">{exp.role}</h3>
+                      <p className="text-neutral-400 font-bold uppercase text-xs tracking-[0.3em] mt-1">{exp.company}</p>
+
+                      <p className="mt-3 md:mt-4 md:max-w-md text-neutral-500 font-medium text-sm leading-relaxed">
+                        {exp.description}
+                      </p>
                     </div>
-                    <p className="max-w-xs text-neutral-500 font-medium text-sm leading-relaxed pt-2">
-                      {exp.description}
-                    </p>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>

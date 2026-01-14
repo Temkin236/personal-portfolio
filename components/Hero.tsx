@@ -5,12 +5,12 @@ import profilePic from '../assets/personalportfolio.jpg';
 const Hero: React.FC = () => {
   return (
     <>
-      <div className="relative min-h-screen flex flex-col justify-center px-6 lg:px-24 overflow-hidden pt-32 pb-24">
+      <div className="relative min-h-screen flex flex-col justify-center px-4 sm:px-8 md:px-16 lg:px-32 xl:px-48 overflow-hidden pt-24 md:pt-32 pb-16 md:pb-24">
         <div className="absolute top-20 left-1/4 w-[50vw] h-[50vw] bg-neutral-50 rounded-full blur-[140px] -z-10 opacity-40 animate-pulse pointer-events-none"></div>
-        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 items-center py-8 md:py-12 lg:py-20">
           {/* Left Column */}
-          <div className="lg:col-span-8 z-10 space-y-12 lg:space-y-16">
-            <div className="space-y-6 lg:space-y-8">
+          <div className="lg:col-span-8 z-10 space-y-8 md:space-y-12 lg:space-y-16 px-2 md:px-6 lg:px-10">
+            <div className="space-y-4 md:space-y-6 lg:space-y-8">
               <div className="flex items-center gap-4 lg:gap-6 reveal active">
                 <div className="w-12 lg:w-16 h-[1px] bg-black"></div>
                 <h2 className="text-[10px] lg:text-[11px] font-black tracking-[0.5em] text-black uppercase">Software Engineering // Production Ready</h2>
@@ -23,16 +23,16 @@ const Hero: React.FC = () => {
                 </span>
               </h1>
             </div>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-10 lg:gap-14 reveal active">
-              <div className="max-w-xl">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-6 md:gap-10 lg:gap-14 reveal active">
+              <div className="max-w-xl px-1 md:px-2">
                 <p className="text-neutral-500 text-lg lg:text-xl leading-relaxed font-medium">
                   I am a <span className="text-black font-black">Full Stack Developer</span>, <span className="text-black font-bold">Agentic AI Architect</span>, and <span className="text-black font-bold">Data Annotator</span>. Merging technical precision with a <span className="text-black font-bold italic">UI/UX beginner's</span> eye for modern aesthetics.
                 </p>
               </div>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-2 md:gap-4">
                 <button 
                   onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="group relative px-10 py-6 bg-black text-white rounded-full font-bold text-[10px] uppercase tracking-[0.4em] transition-all hover:scale-105 active:scale-95 overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)]"
+                  className="group relative px-8 md:px-10 py-4 md:py-6 bg-black text-white rounded-full font-bold text-[10px] uppercase tracking-[0.4em] transition-all hover:scale-105 active:scale-95 overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)]"
                 >
                   <span className="relative z-10">Access System Modules</span>
                   <div className="absolute inset-0 bg-neutral-800 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
@@ -41,7 +41,7 @@ const Hero: React.FC = () => {
             </div>
           </div>
           {/* Right Column */}
-          <div className="lg:col-span-4 relative hidden lg:block group">
+          <div className="lg:col-span-4 relative hidden lg:block group px-2 md:px-4 lg:px-6">
             <div className="relative aspect-[3/4.2] overflow-hidden rounded-[5rem] bg-black shadow-[0_80px_130px_-20px_rgba(0,0,0,0.25)] ring-1 ring-neutral-200 transition-all duration-1000 group-hover:shadow-[0_100px_160px_-30px_rgba(0,0,0,0.4)]">
               <img 
                 src={profilePic} 

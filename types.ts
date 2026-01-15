@@ -18,6 +18,9 @@ export interface Certificate {
   date: string;
   image?: string;
   link: string;
+  description?: string;
+  highlight?: string;
+  technologies?: string[];
 }
 
 export interface Experience {

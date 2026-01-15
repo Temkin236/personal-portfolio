@@ -1,44 +1,9 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
 import Projects from './components/Projects';
-import Certificates from './components/Certificates';
-import Services from './components/Services';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import Manifest from './components/Manifest';
-import { Project } from './types';
-
-const FALLBACK_PROJECTS: Project[] = [
-  {
-    id: 'f1',
-    title: 'Autonomous Swarm Intelligence',
-    category: 'Agentic AI',
-    description: 'A multi-agent system built with LangGraph for decentralized data processing and autonomous decision making.',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070&auto=format&fit=crop',
-    tags: ['Python', 'LangGraph', 'AI'],
-    githubUrl: 'https://github.com/temkin236',
-    deployedUrl: 'https://github.com/temkin236',
-    stars: 12
-  },
-  {
-    id: 'f2',
-    title: 'Distributed Matrix',
-    category: 'Full Stack',
-    description: 'High-performance distributed system architecture with Go-based microservices and React real-time dashboard.',
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop',
-    tags: ['Go', 'React', 'gRPC'],
-    githubUrl: 'https://github.com/temkin236',
-    deployedUrl: 'https://github.com/temkin236',
-    stars: 8
-  }
-];
 
 const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState('home');
-  const [githubProjects, setGithubProjects] = useState<Project[]>([]);
+  const [githubProjects, setGithubProjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchGithubProjects = useCallback(async () => {
@@ -47,8 +12,7 @@ const App: React.FC = () => {
       const response = await fetch('https://api.github.com/users/temkin236/repos?sort=updated&per_page=30');
       
       if (response.status === 403) {
-        console.warn('GitHub API rate limit reached. Using fallback production data.');
-        setGithubProjects(FALLBACK_PROJECTS);
+        console.warn('GitHub API rate limit reached. Falling back to cached data.');
         return;
       }
 
@@ -60,7 +24,7 @@ const App: React.FC = () => {
       
       if (Array.isArray(data)) {
         // Strictly filter for repositories that have a homepage (deployed)
-        const filtered: Project[] = data
+        const filtered = data
           .filter((repo: any) => !repo.fork && repo.homepage)
           .map((repo: any) => ({
             id: repo.id.toString(),
@@ -74,12 +38,10 @@ const App: React.FC = () => {
             stars: repo.stargazers_count
           }));
         
-        // If no deployed projects found, use fallbacks to ensure UI quality
-        setGithubProjects(filtered.length > 0 ? filtered : FALLBACK_PROJECTS);
+        setGithubProjects(filtered);
       }
     } catch (error) {
       console.error('Error fetching GitHub projects:', error);
-      setGithubProjects(FALLBACK_PROJECTS);
     } finally {
       setLoading(false);
     }
@@ -127,43 +89,11 @@ const App: React.FC = () => {
 
   return (
     <div className="relative min-h-screen">
-      <nav 
-        className="fixed bottom-6 left-1/2 -translate-x-1/2 lg:left-auto lg:right-12 lg:top-1/2 lg:-translate-y-1/2 lg:-translate-x-0 z-[100] flex lg:flex-col items-center gap-4 bg-white/80 backdrop-blur-2xl px-6 py-4 lg:py-8 lg:px-4 rounded-full border border-neutral-100 shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-500"
-        aria-label="Progress navigation"
-      >
-        {['home', 'about', 'projects', 'manifest', 'certificates', 'services', 'contact'].map((id) => {
-          const isActive = activeSection === id;
-          return (
-            <button 
-              key={id}
-              onClick={() => scrollTo(id)}
-              className="group relative flex items-center justify-center p-2 focus:outline-none rounded-full"
-              aria-label={`Scroll to ${id}`}
-            >
-              <div className={`transition-all duration-700 rounded-full ${isActive ? 'h-6 w-1.5 bg-black' : 'h-1.5 w-1.5 bg-neutral-200 group-hover:bg-neutral-500'}`} />
-              <span className={`absolute right-10 text-[10px] font-black uppercase tracking-[0.3em] hidden lg:block transition-all duration-500 whitespace-nowrap bg-black text-white px-3 py-1 rounded-md ${isActive ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'}`}>
-                {id}
-              </span>
-            </button>
-          );
-        })}
-      </nav>
-
-      <Navbar activeSection={activeSection} />
-      
       <main id="main-content">
-        <section id="home"><Hero /></section>
-        <section id="about" className="reveal"><About /></section>
-        <section id="projects" className="reveal">
+        <section id="projects">
           <Projects projects={githubProjects} loading={loading} />
         </section>
-        <section id="manifest" className="reveal"><Manifest /></section>
-        <section id="certificates" className="reveal"><Certificates /></section>
-        <section id="services" className="reveal"><Services /></section>
-        <section id="contact" className="reveal"><Contact /></section>
       </main>
-
-      <Footer />
     </div>
   );
 };

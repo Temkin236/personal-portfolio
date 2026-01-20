@@ -67,6 +67,25 @@ const About: React.FC = () => {
       </div>
     </div>
   );
+    const [showAbout, setShowAbout] = useState(true);
+    const [showServices, setShowServices] = useState(false);
+    return (
+      <section id="about" className="about-section">
+        <button onClick={() => setShowAbout((v) => !v)} className="collapsible-btn">About Me</button>
+        {showAbout && (
+          <div className="collapsible-content">
+            <h2>About Me</h2>
+            <p>/* ...about content... */</p>
+          </div>
+        )}
+        <button onClick={() => setShowServices((v) => !v)} className="collapsible-btn">Services</button>
+        {showServices && (
+          <div className="collapsible-content">
+            {/* Services content here, previously from <Services /> */}
+          </div>
+        )}
+      </section>
+    );
 };
 
 export default About;

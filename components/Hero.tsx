@@ -1,6 +1,6 @@
 
 import React from 'react';
-import profilePic from '../assets/personalportfolio.jpg';
+const profilePic = `/assets/personalportfolio.png?${Date.now()}`;
 
 const Hero: React.FC = () => {
   return (
@@ -25,9 +25,9 @@ const Hero: React.FC = () => {
             </div>
             <div className="flex flex-col sm:flex-row sm:items-center gap-6 md:gap-10 lg:gap-14 reveal active">
               <div className="max-w-xl px-1 md:px-2">
-                <p className="text-neutral-500 text-lg lg:text-xl leading-relaxed font-medium">
-                  I am a <span className="text-black font-black">Full Stack Developer</span>, <span className="text-black font-bold">Agentic AI Architect</span>, and <span className="text-black font-bold">Data Annotator</span>. Merging technical precision with a <span className="text-black font-bold italic">UI/UX beginner's</span> eye for modern aesthetics.
-                </p>
+                  <p className="text-neutral-500 text-lg lg:text-xl leading-relaxed font-medium">
+                    I am a developer merging technical precision with a modern aesthetic.
+                  </p>
               </div>
               <div className="flex flex-wrap gap-2 md:gap-4">
                 <button 

@@ -8,7 +8,6 @@ import Certificates from './components/Certificates';
 import Services from './components/Services';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import Manifest from './components/Manifest';
 import { Project } from './types';
 
 const FALLBACK_PROJECTS: Project[] = [
@@ -93,7 +92,7 @@ const App: React.FC = () => {
   useEffect(() => {
     fetchGithubProjects();
 
-    const sections = ['home', 'about', 'projects', 'manifest', 'certificates', 'services', 'contact'];
+    const sections = ['home', 'about', 'projects', 'certificates', 'services', 'contact'];
     
     const sectionObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -131,7 +130,7 @@ const App: React.FC = () => {
         className="fixed bottom-6 left-1/2 -translate-x-1/2 lg:left-auto lg:right-12 lg:top-1/2 lg:-translate-y-1/2 lg:-translate-x-0 z-[100] flex lg:flex-col items-center gap-4 bg-white/80 backdrop-blur-2xl px-6 py-4 lg:py-8 lg:px-4 rounded-full border border-neutral-100 shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-500"
         aria-label="Progress navigation"
       >
-        {['home', 'about', 'projects', 'manifest', 'certificates', 'services', 'contact'].map((id) => {
+        {['home', 'about', 'projects', 'certificates', 'services', 'contact'].map((id) => {
           const isActive = activeSection === id;
           return (
             <button 
@@ -157,7 +156,7 @@ const App: React.FC = () => {
         <section id="projects" className="reveal">
           <Projects projects={githubProjects} loading={loading} />
         </section>
-        <section id="manifest" className="reveal"><Manifest /></section>
+        {/* Manifest section removed */}
         <section id="certificates" className="reveal"><Certificates /></section>
         <section id="services" className="reveal"><Services /></section>
         <section id="contact" className="reveal"><Contact /></section>

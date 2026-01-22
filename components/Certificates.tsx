@@ -9,22 +9,10 @@ const certs: Certificate[] = [
     issuer: 'CSEC ASTU',
     date: '2024',
     link: '#',
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop',
+    image: '/assets/CSEC ASTU.png',
     description: 'Successfully completed an intensive, 4-month full-stack development residency hosted by CSEC ASTU. This program focused on building scalable, production-grade applications using modern industry standards.',
     highlight: 'Mastered Next.js, MongoDB, TypeScript, and Express.js; delivered production-grade apps under tight timelines.',
     technologies: ['Next.js', 'MongoDB', 'TypeScript', 'Express']
-  },
-
-  {
-    id: 'c2',
-    title: 'Mentorship & Leadership (ASTUMS J Bootcamp)',
-    issuer: 'ASTUMS J Bootcamp',
-    date: '2023',
-    link: '#',
-    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2070&auto=format&fit=crop',
-    description: 'Recognized for providing exceptional technical guidance and mentorship to aspiring developers during a three-month intensive bootcamp. I acted as a bridge between complex architectural concepts and student-led implementation.',
-    highlight: 'Led mentee group to 1st Place in final competition through collaborative mentoring and technical oversight.',
-    technologies: ['Mentorship', 'Architecture', 'Collaboration']
   },
 
   {
@@ -33,10 +21,22 @@ const certs: Certificate[] = [
     issuer: 'NEJM Student Developers Association (NSDA)',
     date: '2022',
     link: '#',
-    image: 'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=2070&auto=format&fit=crop',
+    image: '/assets/NSDA.png',
     description: 'Honored as a Core Member of the NSDA Project Team. This role involved driving the development of community-focused software initiatives and managing project lifecycles.',
     highlight: 'Contributed to diverse technical initiatives through creative problem-solving and dedicated teamwork.',
     technologies: ['React', 'Node.js', 'Git']
+  },
+
+  {
+    id: 'c2',
+    title: 'Mentorship & Leadership (ASTUMS J Bootcamp)',
+    issuer: 'ASTUMS J Bootcamp',
+    date: '2023',
+    link: '#',
+    image: '/assets/ASTU MUSLIM STUDENT JEMEA MENTORSHIP.jpg',
+    description: 'Recognized for providing exceptional technical guidance and mentorship to aspiring developers during a three-month intensive bootcamp. I acted as a bridge between complex architectural concepts and student-led implementation.',
+    highlight: 'Led mentee group to 1st Place in final competition through collaborative mentoring and technical oversight.',
+    technologies: ['Mentorship', 'Architecture', 'Collaboration']
   },
 
   {
@@ -45,7 +45,7 @@ const certs: Certificate[] = [
     issuer: 'Zemenay Hackathon',
     date: 'August 2025',
     link: '#',
-    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2070&auto=format&fit=crop',
+    image: '/assets/ZemenayHackaton.jpg',
     description: 'Successfully met the rigorous requirements of the Zemenay Hackathon, a fast-paced innovation challenge focused on rapid prototyping and problem-solving.',
     highlight: 'Received special commemoration for "exceptional efforts" — built high-quality solutions under strict time constraints.',
     technologies: ['Rapid Prototyping', 'JavaScript', 'UI/UX']
@@ -57,7 +57,7 @@ const certs: Certificate[] = [
     issuer: 'Share eLearning',
     date: '2024',
     link: '#',
-    image: 'https://images.unsplash.com/photo-1581093448798-8d5a8d6f6c3b?q=80&w=2070&auto=format&fit=crop',
+    image: '/assets/DATA ANNOTATION.jpg',
     description: 'Completed specialized training in Data Annotation via the Share eLearning LMS, focusing on the critical data processing layer that powers Machine Learning models.',
     highlight: 'Gained expertise in high-fidelity data labeling and QA using AnnotatePlus, ensuring accurate datasets for model training.',
     technologies: ['Data Annotation', 'QA', 'Python']

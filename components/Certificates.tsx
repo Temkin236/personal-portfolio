@@ -100,20 +100,29 @@ const CertificateModal: React.FC<{ cert: Certificate; onClose: () => void }> = (
 
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-[8px]">
-      <div className="bg-white rounded-[2rem] shadow-2xl border border-neutral-100 w-full max-w-lg p-6 relative">
+      <div className="bg-white rounded-[2rem] shadow-2xl border border-neutral-100 w-full max-w-lg h-[90vh] flex flex-col relative">
         <button onClick={onClose} className="absolute top-4 right-4 px-4 py-2 bg-black text-white font-black rounded-full text-xs uppercase tracking-[0.3em] hover:bg-neutral-800 transition-all">Back</button>
-        <h2 className="font-heading font-bold text-2xl lg:text-3xl tracking-tighter text-black mb-4 text-center">{cert.title}</h2>
-        <div className="w-full flex flex-col items-center mb-4">
-          <img src={cert.image} alt={cert.title} className="w-full max-h-80 object-contain border border-neutral-200 rounded-lg mb-3 bg-neutral-50" />
-          <button onClick={handleDownload} className="px-6 py-2 bg-black text-white font-black rounded-full text-xs uppercase tracking-[0.3em] hover:bg-neutral-800 transition-all">Download Certificate</button>
+        <div className="flex-1 overflow-y-auto px-6 pt-8 pb-24">
+          <h2 className="font-heading font-bold text-2xl lg:text-3xl tracking-tighter text-black mb-4 text-center">{cert.title}</h2>
+          <div className="w-full flex flex-col items-center mb-4">
+            <img src={cert.image} alt={cert.title} className="w-full max-h-80 object-contain border border-neutral-200 rounded-lg mb-3 bg-neutral-50" />
+          </div>
+          <div className="mb-2 text-neutral-500 text-sm text-center">
+            <span className="font-black uppercase tracking-[0.3em] text-neutral-400">Issuer:</span> {cert.issuer}<br />
+            <span className="font-black uppercase tracking-[0.3em] text-neutral-400">Date:</span> {cert.date}
+          </div>
+          <div className="mb-2">
+            <span className="font-black uppercase tracking-[0.3em] text-neutral-400">Description:</span>
+            <div className="text-neutral-700 whitespace-pre-line mt-1 text-center text-base">{cert.description}</div>
+          </div>
         </div>
-        <div className="mb-2 text-neutral-500 text-sm text-center">
-          <span className="font-black uppercase tracking-[0.3em] text-neutral-400">Issuer:</span> {cert.issuer}<br />
-          <span className="font-black uppercase tracking-[0.3em] text-neutral-400">Date:</span> {cert.date}
-        </div>
-        <div className="mb-2">
-          <span className="font-black uppercase tracking-[0.3em] text-neutral-400">Description:</span>
-          <div className="text-neutral-700 whitespace-pre-line mt-1 text-center text-base">{cert.description}</div>
+        <div className="absolute bottom-0 left-0 w-full flex justify-center bg-white rounded-b-[2rem] border-t border-neutral-100 p-4">
+          <button
+            onClick={handleDownload}
+            className="px-6 py-2 bg-black text-white font-black rounded-full text-xs uppercase tracking-[0.3em] hover:bg-neutral-800 transition-all w-full max-w-xs"
+          >
+            Download Certificate
+          </button>
         </div>
       </div>
     </div>

@@ -88,42 +88,32 @@ const CertificateModal: React.FC<{ cert: Certificate; onClose: () => void }> = (
     };
   }, [onClose]);
 
+  // Download handler
+  const handleDownload = () => {
+    const link = document.createElement('a');
+    link.href = cert.image || '';
+    link.download = cert.title.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '.jpg';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center p-6" role="dialog" aria-modal="true">
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-[12px]" onClick={onClose} />
-      <div className="relative w-full max-w-2xl bg-white/98 rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/50">
-        <button onClick={onClose} className="absolute top-6 right-6 z-30 w-10 h-10 rounded-full bg-white/80 border flex items-center justify-center hover:bg-black hover:text-white transition-all shadow-sm">✕</button>
-
-        <div className="flex flex-col">
-          <div className="relative h-64 overflow-hidden bg-neutral-900">
-            <img src={cert.image} alt={cert.title} className="w-full h-full object-cover opacity-95" />
-            <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
-          </div>
-
-          <div className="p-12 space-y-8">
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-neutral-400">Certificate</span>
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                </div>
-              </div>
-              <h2 className="text-4xl font-heading font-bold text-black tracking-tighter">{cert.title}</h2>
-              <div className="flex gap-3 flex-wrap">
-                {(cert.technologies || []).map(t => (
-                  <span key={t} className="text-[10px] font-black text-neutral-500 uppercase tracking-widest px-4 py-2 bg-neutral-50 border border-neutral-100 rounded-full">{t}</span>
-                ))}
-              </div>
-            </div>
-
-            {cert.highlight && <p className="font-semibold text-neutral-700">{cert.highlight}</p>}
-            {cert.description && <p className="text-neutral-500 text-lg leading-relaxed">{cert.description}</p>}
-
-            <div className="flex gap-4 pt-6">
-              <a href={cert.link} className="flex-1 text-center bg-black text-white py-4 rounded-3xl font-bold uppercase tracking-[0.4em] text-[10px]">Verify</a>
-              <button onClick={onClose} className="flex-1 text-center bg-white text-black border py-4 rounded-3xl font-bold uppercase tracking-[0.4em] text-[10px]">Close</button>
-            </div>
-          </div>
+    <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-[8px]">
+      <div className="bg-white rounded-[2rem] shadow-2xl border border-neutral-100 w-full max-w-lg p-6 relative">
+        <button onClick={onClose} className="absolute top-4 right-4 px-4 py-2 bg-black text-white font-black rounded-full text-xs uppercase tracking-[0.3em] hover:bg-neutral-800 transition-all">Back</button>
+        <h2 className="font-heading font-bold text-2xl lg:text-3xl tracking-tighter text-black mb-4 text-center">{cert.title}</h2>
+        <div className="w-full flex flex-col items-center mb-4">
+          <img src={cert.image} alt={cert.title} className="w-full max-h-80 object-contain border border-neutral-200 rounded-lg mb-3 bg-neutral-50" />
+          <button onClick={handleDownload} className="px-6 py-2 bg-black text-white font-black rounded-full text-xs uppercase tracking-[0.3em] hover:bg-neutral-800 transition-all">Download Certificate</button>
+        </div>
+        <div className="mb-2 text-neutral-500 text-sm text-center">
+          <span className="font-black uppercase tracking-[0.3em] text-neutral-400">Issuer:</span> {cert.issuer}<br />
+          <span className="font-black uppercase tracking-[0.3em] text-neutral-400">Date:</span> {cert.date}
+        </div>
+        <div className="mb-2">
+          <span className="font-black uppercase tracking-[0.3em] text-neutral-400">Description:</span>
+          <div className="text-neutral-700 whitespace-pre-line mt-1 text-center text-base">{cert.description}</div>
         </div>
       </div>
     </div>

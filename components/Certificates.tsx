@@ -101,7 +101,16 @@ const CertificateModal: React.FC<{ cert: Certificate; onClose: () => void }> = (
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-[8px]">
       <div className="bg-white rounded-[2rem] shadow-2xl border border-neutral-100 w-full max-w-lg h-[90vh] flex flex-col relative">
-        <button onClick={onClose} className="absolute top-4 right-4 px-4 py-2 bg-black text-white font-black rounded-full text-xs uppercase tracking-[0.3em] hover:bg-neutral-800 transition-all">Back</button>
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 flex items-center gap-2 px-4 py-2 bg-black text-white font-black rounded-full text-xs uppercase tracking-[0.3em] hover:bg-neutral-800 transition-all shadow"
+          aria-label="Back"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+          </svg>
+          Back
+        </button>
         <div className="flex-1 overflow-y-auto px-6 pt-8 pb-24">
           <h2 className="font-heading font-bold text-2xl lg:text-3xl tracking-tighter text-black mb-4 text-center">{cert.title}</h2>
           <div className="w-full flex flex-col items-center mb-4">

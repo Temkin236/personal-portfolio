@@ -8,13 +8,15 @@ interface ProjectsProps {
 }
 
 const Toast: React.FC<{ message: string; visible: boolean }> = ({ message, visible }) => (
-  <div className="fixed inset-0 z-[300] flex items-center justify-center pointer-events-none">
-    <div className={`bg-black/85 backdrop-blur-xl text-white px-8 py-4 rounded-full flex items-center gap-4 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] border border-neutral-800 transition-all duration-500 transform ${visible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-3 scale-95'}`}>
-      <div className="flex gap-1">
-        <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-bounce" />
-        <div className="w-1.5 h-1.5 bg-green-500/50 rounded-full animate-bounce [animation-delay:0.2s]" />
+  <div className="fixed inset-0 z-[300] pointer-events-none">
+    <div className="absolute inset-0 flex items-center justify-center">
+      <div className={`bg-black/85 backdrop-blur-xl text-white px-8 py-4 rounded-full flex items-center gap-4 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] border border-neutral-800 transition-all duration-300 ${visible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+        <div className="flex gap-1">
+          <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-bounce" />
+          <div className="w-1.5 h-1.5 bg-green-500/50 rounded-full animate-bounce [animation-delay:0.2s]" />
+        </div>
+        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-center">{message}</span>
       </div>
-      <span className="text-[10px] font-black uppercase tracking-[0.4em]">{message}</span>
     </div>
   </div>
 );

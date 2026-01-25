@@ -66,8 +66,8 @@ const certs: Certificate[] = [
 
 // Certificate detail modal (moved above to avoid TSX parsing ambiguity)
 const Toast: React.FC<{ message: string; visible: boolean }> = ({ message, visible }) => (
-  <div className={`fixed bottom-12 left-1/2 -translate-x-1/2 z-[300] transition-all duration-700 transform ${visible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95 pointer-events-none'}`}>
-    <div className="bg-black/90 backdrop-blur-xl text-white px-8 py-4 rounded-full flex items-center gap-4 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] border border-neutral-800">
+  <div className="fixed inset-0 z-[300] flex items-center justify-center pointer-events-none">
+    <div className={`bg-black/85 backdrop-blur-xl text-white px-8 py-4 rounded-full flex items-center gap-4 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] border border-neutral-800 transition-all duration-500 transform ${visible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-3 scale-95'}`}>
       <div className="flex gap-1">
         <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-bounce" />
         <div className="w-1.5 h-1.5 bg-green-500/50 rounded-full animate-bounce [animation-delay:0.2s]" />
@@ -99,37 +99,74 @@ const CertificateModal: React.FC<{ cert: Certificate; onClose: () => void }> = (
   };
 
   return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-[8px]">
-      <div className="bg-white rounded-[2rem] shadow-2xl border border-neutral-100 w-full max-w-lg h-[90vh] flex flex-col relative">
+    <div className="fixed inset-0 z-[200] flex items-center justify-center px-4 sm:px-6 py-10 sm:py-14 bg-black/60 backdrop-blur-sm">
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col relative overflow-hidden">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 flex items-center gap-2 px-4 py-2 bg-black text-white font-black rounded-full text-xs uppercase tracking-[0.3em] hover:bg-neutral-800 transition-all shadow"
-          aria-label="Back"
+          className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-neutral-100 hover:bg-neutral-200 flex items-center justify-center transition-colors"
+          aria-label="Close"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-neutral-700">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
-          Back
         </button>
-        <div className="flex-1 overflow-y-auto px-6 pt-8 pb-24">
-          <h2 className="font-heading font-bold text-2xl lg:text-3xl tracking-tighter text-black mb-4 text-center">{cert.title}</h2>
-          <div className="w-full flex flex-col items-center mb-4">
-            <img src={cert.image} alt={cert.title} className="w-full max-h-80 object-contain border border-neutral-200 rounded-lg mb-3 bg-neutral-50" />
+        <div className="flex-1 overflow-y-auto p-6 sm:p-8 lg:p-10 space-y-6">
+          <div className="space-y-4">
+            <div className="flex items-center gap-2 text-sm">
+              <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+              <span className="text-xs font-medium text-green-600">Verified Certificate</span>
+            </div>
+            <h2 className="font-bold text-2xl sm:text-3xl text-neutral-900 leading-tight">{cert.title}</h2>
           </div>
-          <div className="mb-2 text-neutral-500 text-sm text-center">
-            <span className="font-black uppercase tracking-[0.3em] text-neutral-400">Issuer:</span> {cert.issuer}<br />
-            <span className="font-black uppercase tracking-[0.3em] text-neutral-400">Date:</span> {cert.date}
+
+          <div className="w-full flex flex-col items-center bg-neutral-50 p-4 rounded-xl">
+            <img src={cert.image} alt={cert.title} className="w-full max-h-96 object-contain rounded-lg" />
           </div>
-          <div className="mb-2">
-            <span className="font-black uppercase tracking-[0.3em] text-neutral-400">Description:</span>
-            <div className="text-neutral-700 whitespace-pre-line mt-1 text-center text-base">{cert.description}</div>
+
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-4 p-4 bg-neutral-50 rounded-lg">
+              <div>
+                <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wide mb-1">Issuer</p>
+                <p className="text-sm font-medium text-neutral-900">{cert.issuer}</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wide mb-1">Date</p>
+                <p className="text-sm font-medium text-neutral-900">{cert.date}</p>
+              </div>
+            </div>
+
+            {cert.description && (
+              <div>
+                <h3 className="text-sm font-semibold text-neutral-700 mb-2">About this certification</h3>
+                <p className="text-neutral-600 text-sm leading-relaxed">{cert.description}</p>
+              </div>
+            )}
+
+            {cert.highlight && (
+              <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                <h3 className="text-sm font-semibold text-blue-900 mb-1">Key Achievement</h3>
+                <p className="text-sm text-blue-800">{cert.highlight}</p>
+              </div>
+            )}
+
+            {cert.technologies && cert.technologies.length > 0 && (
+              <div>
+                <h3 className="text-sm font-semibold text-neutral-700 mb-2">Technologies & Skills</h3>
+                <div className="flex flex-wrap gap-2">
+                  {cert.technologies.map(tech => (
+                    <span key={tech} className="text-xs font-medium text-neutral-600 px-3 py-1.5 bg-white border border-neutral-200 rounded-lg">{tech}</span>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 w-full flex justify-center bg-white rounded-b-[2rem] border-t border-neutral-100 p-4">
+        <div className="border-t border-neutral-200 p-4 sm:p-6 bg-white">
           <button
             onClick={handleDownload}
-            className="px-6 py-2 bg-black text-white font-black rounded-full text-xs uppercase tracking-[0.3em] hover:bg-neutral-800 transition-all w-full max-w-xs"
+            className="w-full bg-neutral-900 text-white px-6 py-3 rounded-lg font-medium text-sm transition-all hover:bg-neutral-800 active:scale-[0.98] flex items-center justify-center gap-2"
           >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
             Download Certificate
           </button>
         </div>
@@ -259,12 +296,7 @@ const Certificates: React.FC = () => {
 
                   <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-12 group-hover:translate-y-0">
                     <button
-                      onClick={() => {
-                        const techs = cert.technologies?.join(' · ') || 'Details';
-                        setToast({ visible: true, message: `Opening details — ${techs}` });
-                        setTimeout(() => setToast({ visible: false, message: '' }), 1200);
-                        setTimeout(() => setSelectedCert(cert), 350);
-                      }}
+                      onClick={() => setSelectedCert(cert)}
                       className="relative px-10 sm:px-12 py-6 sm:py-7 bg-black text-white rounded-full shadow-2xl flex flex-col items-center gap-2 group/btn overflow-hidden active:scale-95 border-2 border-white/20 backdrop-blur-sm"
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-neutral-800 via-neutral-700 to-neutral-800 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500" />
@@ -295,12 +327,12 @@ const Certificates: React.FC = () => {
                   </div>
 
                   <div className="flex items-center justify-between pt-6">
-                    <button onClick={() => {
-                      const techs = cert.technologies?.join(' · ') || 'Details';
-                      setToast({ visible: true, message: `Opening details — ${techs}` });
-                      setTimeout(() => setToast({ visible: false, message: '' }), 1200);
-                      setTimeout(() => setSelectedCert(cert), 350);
-                    }} className="text-sm font-bold text-neutral-700 hover:text-black transition-colors duration-300 underline underline-offset-4">View Details</button>
+                    <button 
+                      onClick={() => setSelectedCert(cert)} 
+                      className="text-sm font-bold text-neutral-700 hover:text-black transition-colors duration-300 underline underline-offset-4"
+                    >
+                      View Details
+                    </button>
                     <span className="text-xs text-neutral-500 font-medium bg-neutral-100 px-4 py-2 rounded-full">{cert.date}</span>
                   </div>
                 </div>

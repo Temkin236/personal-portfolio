@@ -8,8 +8,8 @@ interface ProjectsProps {
 }
 
 const Toast: React.FC<{ message: string; visible: boolean }> = ({ message, visible }) => (
-  <div className={`fixed bottom-12 left-1/2 -translate-x-1/2 z-[300] transition-all duration-700 transform ${visible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95 pointer-events-none'}`}>
-    <div className="bg-black/90 backdrop-blur-xl text-white px-8 py-4 rounded-full flex items-center gap-4 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] border border-neutral-800">
+  <div className="fixed inset-0 z-[300] flex items-center justify-center pointer-events-none">
+    <div className={`bg-black/85 backdrop-blur-xl text-white px-8 py-4 rounded-full flex items-center gap-4 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] border border-neutral-800 transition-all duration-500 transform ${visible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-3 scale-95'}`}>
       <div className="flex gap-1">
         <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-bounce" />
         <div className="w-1.5 h-1.5 bg-green-500/50 rounded-full animate-bounce [animation-delay:0.2s]" />
@@ -31,67 +31,72 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ pro
   }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center p-6" role="dialog" aria-modal="true">
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-[12px] transition-opacity duration-700" onClick={onClose} />
+    <div className="fixed inset-0 z-[200] flex items-center justify-center px-4 sm:px-6 py-10 sm:py-14" role="dialog" aria-modal="true">
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300" onClick={onClose} />
       
-      <div className="relative w-full max-w-2xl bg-white/98 backdrop-blur-3xl rounded-[4rem] overflow-hidden shadow-2xl border border-white/50 animate-in zoom-in-95 duration-500">
+      <div className="relative w-full max-w-3xl max-h-[85vh] bg-white rounded-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300">
         <button 
           onClick={onClose}
-          className="absolute top-10 right-10 z-30 w-12 h-12 rounded-full bg-white/80 border border-neutral-100 flex items-center justify-center hover:bg-black hover:text-white transition-all shadow-sm"
+          className="absolute top-4 right-4 z-30 w-10 h-10 rounded-full bg-neutral-100 hover:bg-neutral-200 flex items-center justify-center transition-colors"
+          aria-label="Close"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+          <svg className="w-5 h-5 text-neutral-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
         </button>
 
-        <div className="flex flex-col">
-          <div className="relative h-80 overflow-hidden bg-neutral-900">
+        <div className="flex flex-col overflow-y-auto max-h-[90vh]">
+          <div className="relative h-64 sm:h-80 overflow-hidden bg-neutral-100">
             <img 
               src={project.image} 
-              alt="" 
-              className="w-full h-full object-cover opacity-90" 
+              alt={project.title} 
+              className="w-full h-full object-cover" 
               onError={(e) => {
                 (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop";
               }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
           </div>
 
-          <div className="p-16 space-y-12">
-            <div className="space-y-6">
-              <div className="flex items-center justify-between">
-                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-neutral-400 border-b border-neutral-100 pb-2">Module Specifications</span>
+          <div className="p-6 sm:p-8 lg:p-10 space-y-6">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between flex-wrap gap-3">
+                 <span className="text-xs font-semibold text-neutral-500 uppercase tracking-wide">{project.category || 'Project'}</span>
                  <div className="flex items-center gap-2">
-                   <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                   <span className="text-[9px] font-black uppercase tracking-widest text-green-600">Verified Deployment</span>
+                   <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                   <span className="text-xs font-medium text-green-600">Live & Deployed</span>
                  </div>
               </div>
-              <h2 className="text-6xl font-heading font-bold text-black tracking-tighter leading-none capitalize">{project.title}</h2>
-              <div className="flex flex-wrap gap-3">
+              <h2 className="text-3xl sm:text-4xl font-bold text-neutral-900 leading-tight">{project.title}</h2>
+              <div className="flex flex-wrap gap-2">
                 {project.tags.map(tag => (
-                  <span key={tag} className="text-[10px] font-black text-neutral-500 uppercase tracking-widest px-5 py-2 bg-neutral-50 border border-neutral-100 rounded-full">{tag}</span>
+                  <span key={tag} className="text-xs font-medium text-neutral-600 px-3 py-1.5 bg-neutral-100 rounded-lg">{tag}</span>
                 ))}
               </div>
             </div>
             
-            <p className="text-neutral-500 text-xl leading-relaxed font-medium">{project.description}</p>
+            <div className="border-t border-neutral-200 pt-6">
+              <h3 className="text-sm font-semibold text-neutral-700 mb-2">About this project</h3>
+              <p className="text-neutral-600 text-base leading-relaxed">{project.description}</p>
+            </div>
             
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
               {project.deployedUrl && (
                 <a 
                   href={project.deployedUrl} 
                   target="_blank" 
                   rel="noreferrer"
-                  className="flex-1 text-center bg-black text-white py-6 rounded-3xl font-bold uppercase tracking-[0.4em] text-[10px] transition-all hover:bg-neutral-800 active:scale-95 shadow-2xl shadow-black/20"
+                  className="flex-1 text-center bg-neutral-900 text-white px-6 py-3 rounded-lg font-medium text-sm transition-all hover:bg-neutral-800 active:scale-[0.98] flex items-center justify-center gap-2"
                 >
-                  Visit Live Production
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                  View Live Site
                 </a>
               )}
               <a 
                 href={project.githubUrl} 
                 target="_blank" 
                 rel="noreferrer"
-                className="flex-1 text-center bg-white text-black border border-neutral-200 py-6 rounded-3xl font-bold uppercase tracking-[0.4em] text-[10px] transition-all hover:border-black active:scale-95"
+                className="flex-1 text-center bg-white text-neutral-900 border-2 border-neutral-200 px-6 py-3 rounded-lg font-medium text-sm transition-all hover:border-neutral-900 active:scale-[0.98] flex items-center justify-center gap-2"
               >
-                Inspect GitHub Tree
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                View on GitHub
               </a>
             </div>
           </div>

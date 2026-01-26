@@ -7,20 +7,6 @@ interface ProjectsProps {
   loading: boolean;
 }
 
-const Toast: React.FC<{ message: string; visible: boolean }> = ({ message, visible }) => (
-  <div className="fixed inset-0 z-[300] pointer-events-none">
-    <div className="absolute inset-0 flex items-center justify-center">
-      <div className={`bg-black/85 backdrop-blur-xl text-white px-8 py-4 rounded-full flex items-center gap-4 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] border border-neutral-800 transition-all duration-300 ${visible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-        <div className="flex gap-1">
-          <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-bounce" />
-          <div className="w-1.5 h-1.5 bg-green-500/50 rounded-full animate-bounce [animation-delay:0.2s]" />
-        </div>
-        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-center">{message}</span>
-      </div>
-    </div>
-  </div>
-);
-
 const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ project, onClose }) => {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -110,18 +96,9 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ pro
 
 const Projects: React.FC<ProjectsProps> = ({ projects, loading }) => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [toast, setToast] = useState({ visible: false, message: '' });
   const scrollRef = useRef<HTMLDivElement>(null);
   const [githubProjects, setGithubProjects] = useState<Project[]>([]);
   const [fetchingGithub, setFetchingGithub] = useState(false);
-
-  const showToast = (name: string) => {
-    setToast({ visible: true, message: `Accessing ${name} module specifications...` });
-  };
-
-  const hideToast = () => {
-    setToast({ visible: false, message: '' });
-  };
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -238,8 +215,6 @@ const Projects: React.FC<ProjectsProps> = ({ projects, loading }) => {
 
   return (
     <div className="py-32 sm:py-56 lg:py-64 bg-gradient-to-b from-white via-neutral-50/30 to-white relative overflow-hidden">
-      <Toast visible={toast.visible} message={toast.message} />
-      
       {/* Decorative background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 right-10 w-96 h-96 bg-gradient-to-br from-blue-50 to-purple-50 rounded-full blur-3xl opacity-30" />
@@ -325,8 +300,6 @@ const Projects: React.FC<ProjectsProps> = ({ projects, loading }) => {
                 key={project.id} 
                 className="group relative flex-none w-80 sm:w-[420px] lg:w-[460px] flex flex-col"
                 style={{ scrollSnapAlign: 'start' }}
-                onMouseEnter={() => showToast(project.title)}
-                onMouseLeave={hideToast}
               >
                 <div 
                   className="relative aspect-[4/5] overflow-hidden rounded-[3rem] sm:rounded-[4rem] lg:rounded-[5rem] bg-gradient-to-br from-neutral-50 to-white border-2 border-neutral-100 shadow-[0_8px_40px_rgba(0,0,0,0.04)] transition-all duration-[1.5s] ease-[var(--brand-ease)] hover:shadow-[0_60px_140px_rgba(0,0,0,0.12)] hover:-translate-y-8 hover:border-neutral-200"

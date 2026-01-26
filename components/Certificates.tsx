@@ -64,21 +64,6 @@ const certs: Certificate[] = [
   }
 ];
 
-// Certificate detail modal (moved above to avoid TSX parsing ambiguity)
-const Toast: React.FC<{ message: string; visible: boolean }> = ({ message, visible }) => (
-  <div className="fixed inset-0 z-[300] pointer-events-none">
-    <div className="absolute inset-0 flex items-center justify-center">
-      <div className={`bg-black/85 backdrop-blur-xl text-white px-8 py-4 rounded-full flex items-center gap-4 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] border border-neutral-800 transition-all duration-300 ${visible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-        <div className="flex gap-1">
-          <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-bounce" />
-          <div className="w-1.5 h-1.5 bg-green-500/50 rounded-full animate-bounce [animation-delay:0.2s]" />
-        </div>
-        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-center">{message}</span>
-      </div>
-    </div>
-  </div>
-);
-
 const CertificateModal: React.FC<{ cert: Certificate; onClose: () => void }> = ({ cert, onClose }) => {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -180,7 +165,6 @@ const CertificateModal: React.FC<{ cert: Certificate; onClose: () => void }> = (
 const Certificates: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
-  const [toast, setToast] = useState<{ visible: boolean; message: string }>({ visible: false, message: '' });
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -215,8 +199,6 @@ const Certificates: React.FC = () => {
 
   return (
     <div className="py-32 sm:py-56 lg:py-64 bg-gradient-to-b from-neutral-50 via-white/30 to-neutral-50 relative overflow-hidden">
-      <Toast visible={toast.visible} message={toast.message} />
-
       {/* Decorative background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-green-50 to-teal-50 rounded-full blur-3xl opacity-30" />
@@ -279,8 +261,6 @@ const Certificates: React.FC = () => {
                 key={cert.id}
                 className="group relative flex-none w-80 sm:w-[420px] lg:w-[460px] flex flex-col"
                 style={{ scrollSnapAlign: 'start' }}
-                onMouseEnter={() => setToast({ visible: true, message: cert.title })}
-                onMouseLeave={() => setToast({ visible: false, message: '' })}
               >
                 <div className="relative aspect-[4/5] overflow-hidden rounded-[3rem] sm:rounded-[4rem] lg:rounded-[5rem] bg-gradient-to-br from-neutral-50 to-white border-2 border-neutral-100 shadow-[0_8px_40px_rgba(0,0,0,0.04)] transition-all duration-[1.5s] ease-[var(--brand-ease)] hover:shadow-[0_60px_140px_rgba(0,0,0,0.12)] hover:-translate-y-8 hover:border-neutral-200">
                   <img

@@ -8,7 +8,7 @@ const skills = [
 
 const Services: React.FC = () => {
   return (
-    <div className="py-12 sm:py-16 px-6 lg:px-20 bg-white text-black">
+    <div className="py-16 sm:py-20 px-6 lg:px-20 bg-white text-black">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           <div className="lg:col-span-5 space-y-4">

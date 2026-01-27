@@ -7,7 +7,7 @@ const profilePic = `/assets/personalportfolio.png?${Date.now()}`;
 
 const Hero: React.FC = () => {
   return (
-    <div className="relative min-h-screen flex flex-col justify-center px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 overflow-hidden pt-20 pb-12 bg-gradient-to-br from-neutral-50 via-white to-neutral-100">
+    <div className="relative min-h-screen flex flex-col justify-center px-4 sm:px-8 md:px-12 lg:px-20 overflow-hidden pt-20 pb-12 bg-gradient-to-br from-neutral-50 via-white to-neutral-100">
       {/* Animated background elements */}
       <div className="absolute top-20 left-1/4 w-[50vw] h-[50vw] bg-neutral-100 rounded-full blur-[140px] -z-10 opacity-40 animate-pulse pointer-events-none" />
       <div className="absolute bottom-20 right-1/4 w-[40vw] h-[40vw] bg-neutral-50 rounded-full blur-[120px] -z-10 opacity-30 animate-float pointer-events-none" />

@@ -198,7 +198,7 @@ const Certificates: React.FC = () => {
   }, []);
 
   return (
-    <div className="py-20 sm:py-24 lg:py-32 bg-gradient-to-b from-neutral-50 via-white/30 to-neutral-50 relative overflow-hidden">
+    <div className="py-16 sm:py-20 bg-gradient-to-b from-neutral-50 via-white/30 to-neutral-50 relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-green-50 to-teal-50 rounded-full blur-3xl opacity-30" />
@@ -206,29 +206,29 @@ const Certificates: React.FC = () => {
       </div>
 
       <div className="relative z-10">
-        <div className="px-6 lg:px-24 xl:px-32 max-w-[1600px] mx-auto">
-          <header className="mb-16 space-y-4">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-[2px] bg-black" />
+        <div className="px-6 lg:px-20 max-w-[1600px] mx-auto">
+          <header className="mb-12 space-y-3">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-[2px] bg-black" />
               <h4 className="text-[10px] font-bold uppercase tracking-wider text-neutral-600">My Certifications</h4>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-black tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-heading font-bold text-black tracking-tight">
               Achievements
             </h2>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              <span className="text-xs font-medium text-green-600">{certs.length} Verified Certificates</span>
+              <span className="text-[10px] font-medium text-green-600">{certs.length} Verified Certificates</span>
             </div>
           </header>
 
-          <div className="flex justify-between items-center mb-12">
-            <div className="flex items-center gap-4 bg-white/80 backdrop-blur-md px-6 py-3 rounded-full border border-neutral-200 shadow-lg">
+          <div className="flex justify-between items-center mb-10">
+            <div className="flex items-center gap-3 bg-white/80 backdrop-blur-md px-5 py-2.5 rounded-full border border-neutral-200 shadow-md">
               <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-500">{certs.length} Certificates</span>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <button 
                 onClick={() => scroll('left')} 
-                className="group w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white border-2 border-neutral-200 hover:border-black hover:bg-black hover:text-white transition-all duration-500 flex items-center justify-center shadow-lg hover:shadow-2xl active:scale-95 backdrop-blur-md"
+                className="group w-11 h-11 rounded-full bg-white border-2 border-neutral-200 hover:border-black hover:bg-black hover:text-white transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg active:scale-95"
                 aria-label="Scroll left (Alt + Left Arrow)"
               >
                 <svg className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 group-hover:-translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -237,7 +237,7 @@ const Certificates: React.FC = () => {
               </button>
               <button 
                 onClick={() => scroll('right')} 
-                className="group w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white border-2 border-neutral-200 hover:border-black hover:bg-black hover:text-white transition-all duration-500 flex items-center justify-center shadow-lg hover:shadow-2xl active:scale-95 backdrop-blur-md"
+                className="group w-11 h-11 rounded-full bg-white border-2 border-neutral-200 hover:border-black hover:bg-black hover:text-white transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg active:scale-95"
                 aria-label="Scroll right (Alt + Right Arrow)"
               >
                 <svg className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 group-hover:translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -249,20 +249,20 @@ const Certificates: React.FC = () => {
 
           <div 
             ref={scrollRef} 
-            className="flex gap-8 sm:gap-10 lg:gap-12 overflow-x-auto pb-12 scrollbar-hide horizontal-scroll"
+            className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide horizontal-scroll"
             style={{
               scrollSnapType: 'x mandatory',
               WebkitOverflowScrolling: 'touch'
             }}
           >
-            <div className="flex-none w-0 lg:w-40 xl:w-48" />
+            <div className="flex-none w-0 lg:w-20" />
             {certs.map((cert, index) => (
               <article
                 key={cert.id}
-                className="group relative flex-none w-72 sm:w-80 lg:w-[340px] flex flex-col"
+                className="group relative flex-none w-[280px] sm:w-[320px] flex flex-col"
                 style={{ scrollSnapAlign: 'start' }}
               >
-                <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-50 to-white border-2 border-neutral-100 shadow-sm transition-all duration-[1.2s] ease-[var(--brand-ease)] hover:shadow-xl hover:-translate-y-4 hover:border-neutral-200">
+                <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-gradient-to-br from-neutral-50 to-white border-2 border-neutral-100 shadow-sm transition-all duration-700 hover:shadow-xl hover:-translate-y-3 hover:border-neutral-200">
                   <img
                     src={cert.image}
                     alt={cert.title}

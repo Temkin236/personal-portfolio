@@ -214,7 +214,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects, loading }) => {
   }, []);
 
   return (
-    <div className="py-20 sm:py-24 lg:py-32 bg-gradient-to-b from-white via-neutral-50/30 to-white relative overflow-hidden">
+    <div className="py-16 sm:py-20 bg-gradient-to-b from-white via-neutral-50/30 to-white relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 right-10 w-96 h-96 bg-gradient-to-br from-blue-50 to-purple-50 rounded-full blur-3xl opacity-30" />
@@ -223,35 +223,35 @@ const Projects: React.FC<ProjectsProps> = ({ projects, loading }) => {
       
       <div className="relative z-10">
         {/* Header */}
-        <div className="px-6 lg:px-24 xl:px-32 max-w-[1600px] mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-            <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                 <div className="w-12 h-[2px] bg-black" />
+        <div className="px-6 lg:px-20 max-w-[1600px] mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                 <div className="w-10 h-[2px] bg-black" />
                  <h4 className="text-[10px] font-bold uppercase tracking-wider text-neutral-600">My Projects</h4>
               </div>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-black tracking-tight">
+              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-black tracking-tight">
                 Live Deployments
               </h2>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                <span className="text-xs font-medium text-green-600">Active Projects</span>
+                <span className="text-[10px] font-medium text-green-600">Active Projects</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Navigation Controls */}
-        <div className="flex justify-between items-center px-6 lg:px-24 xl:px-32 max-w-[1600px] mx-auto mb-12">
-            <div className="flex items-center gap-4 bg-white/80 backdrop-blur-md px-6 py-3 rounded-full border border-neutral-200 shadow-lg">
+        <div className="flex justify-between items-center px-6 lg:px-20 max-w-[1600px] mx-auto mb-10">
+            <div className="flex items-center gap-3 bg-white/80 backdrop-blur-md px-5 py-2.5 rounded-full border border-neutral-200 shadow-md">
             <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-500">
-              {fetchingGithub ? 'Fetching...' : loading ? 'Loading...' : `${(githubProjects.length ? githubProjects.length : projects.length)} Projects`}
+              {fetchingGithub ? 'Loading...' : loading ? 'Loading...' : `${(githubProjects.length ? githubProjects.length : projects.length)} Projects`}
             </span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <button 
               onClick={() => scroll('left')}
-              className="group w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white border-2 border-neutral-200 hover:border-black hover:bg-black hover:text-white transition-all duration-500 flex items-center justify-center shadow-lg hover:shadow-2xl active:scale-95 backdrop-blur-md"
+              className="group w-11 h-11 rounded-full bg-white border-2 border-neutral-200 hover:border-black hover:bg-black hover:text-white transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg active:scale-95"
               aria-label="Scroll left (Ctrl + Left Arrow)"
               title="Scroll left (Ctrl + Left Arrow)"
             >
@@ -261,7 +261,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects, loading }) => {
             </button>
             <button 
               onClick={() => scroll('right')}
-              className="group w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white border-2 border-neutral-200 hover:border-black hover:bg-black hover:text-white transition-all duration-500 flex items-center justify-center shadow-lg hover:shadow-2xl active:scale-95 backdrop-blur-md"
+              className="group w-11 h-11 rounded-full bg-white border-2 border-neutral-200 hover:border-black hover:bg-black hover:text-white transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg active:scale-95"
               aria-label="Scroll right (Ctrl + Right Arrow)"
               title="Scroll right (Ctrl + Right Arrow)"
             >

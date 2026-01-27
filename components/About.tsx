@@ -10,7 +10,7 @@ const experiences: Experience[] = [
 
 const About: React.FC = () => {
   return (
-    <div className="py-12 md:py-16 px-6 sm:px-8 md:px-12 lg:px-20 bg-white border-y border-neutral-100 overflow-hidden">
+    <div className="py-16 sm:py-20 px-6 lg:px-20 bg-white border-y border-neutral-100 overflow-hidden">
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           <div className="lg:col-span-5 space-y-6">

@@ -3,7 +3,7 @@ import React from 'react';
 
 const Contact: React.FC = () => {
   return (
-    <div className="py-16 lg:py-24 px-6 lg:px-20 bg-white overflow-hidden">
+    <div className="py-16 sm:py-20 px-6 lg:px-20 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div className="space-y-8 lg:space-y-10">
           <div className="space-y-3">

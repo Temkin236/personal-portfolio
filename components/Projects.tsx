@@ -214,7 +214,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects, loading }) => {
   }, []);
 
   return (
-    <div className="py-32 sm:py-56 lg:py-64 bg-gradient-to-b from-white via-neutral-50/30 to-white relative overflow-hidden">
+    <div className="py-20 sm:py-24 lg:py-32 bg-gradient-to-b from-white via-neutral-50/30 to-white relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 right-10 w-96 h-96 bg-gradient-to-br from-blue-50 to-purple-50 rounded-full blur-3xl opacity-30" />
@@ -224,31 +224,28 @@ const Projects: React.FC<ProjectsProps> = ({ projects, loading }) => {
       <div className="relative z-10">
         {/* Header */}
         <div className="px-6 lg:px-24 xl:px-32 max-w-[1600px] mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-32 lg:mb-40 gap-12">
-            <div className="space-y-8 lg:space-y-10">
-              <div className="flex items-center gap-6">
-                 <div className="w-16 h-[2px] bg-gradient-to-r from-black to-neutral-300" />
-                 <h4 className="text-[10px] font-black uppercase tracking-[0.5em] text-black">Verified Matrix</h4>
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+            <div className="space-y-4">
+              <div className="flex items-center gap-4">
+                 <div className="w-12 h-[2px] bg-black" />
+                 <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-600">My Projects</h4>
               </div>
-              <h2 className="text-6xl sm:text-7xl lg:text-[10rem] font-heading font-bold text-black tracking-tighter leading-[0.85]">
-                Production <br /><span className="bg-gradient-to-r from-neutral-200 via-neutral-300 to-neutral-200 bg-clip-text text-transparent">Modules.</span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-black tracking-tight">
+                Live Deployments
               </h2>
-              <div className="flex items-center gap-3 pt-4">
-                <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                <span className="text-[11px] font-bold uppercase tracking-wider text-green-600">Live Deployments Active</span>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                <span className="text-xs font-medium text-green-600">Active Projects</span>
               </div>
             </div>
-            <p className="max-w-[380px] text-neutral-500 text-base font-medium leading-relaxed border-l-4 border-neutral-200 pl-10 hidden sm:block backdrop-blur-sm bg-white/50 p-8 rounded-3xl shadow-sm">
-              Strictly showcasing live applications and deployed architectural builds from my production repository stack. Each project represents a complete solution deployed to production environments.
-            </p>
           </div>
         </div>
 
         {/* Navigation Controls */}
-        <div className="flex justify-between items-center px-6 lg:px-24 xl:px-32 max-w-[1600px] mx-auto mb-16 lg:mb-20">
-            <div className="flex items-center gap-6 bg-white/80 backdrop-blur-md px-8 py-4 rounded-full border border-neutral-200 shadow-lg">
-            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-neutral-400">
-              {fetchingGithub ? 'Fetching GitHub...' : loading ? 'Loading...' : `${(githubProjects.length ? githubProjects.length : projects.length)} Active Deployments`}
+        <div className="flex justify-between items-center px-6 lg:px-24 xl:px-32 max-w-[1600px] mx-auto mb-12">
+            <div className="flex items-center gap-4 bg-white/80 backdrop-blur-md px-6 py-3 rounded-full border border-neutral-200 shadow-lg">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-500">
+              {fetchingGithub ? 'Fetching...' : loading ? 'Loading...' : `${(githubProjects.length ? githubProjects.length : projects.length)} Projects`}
             </span>
           </div>
           <div className="flex items-center gap-4">

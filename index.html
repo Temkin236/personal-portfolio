@@ -137,6 +137,52 @@
             50% { transform: translateY(-10px) rotate(-1deg); }
         }
         .animate-float { animation: float 8s ease-in-out infinite; }
+
+        @keyframes scroll {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(100%); }
+            100% { transform: translateY(0); }
+        }
+        .animate-scroll { animation: scroll 2s ease-in-out infinite; }
+
+        /* One-page layout enhancements */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        /* Section transitions - compact design */
+        section {
+            position: relative;
+        }
+
+        section#home {
+            min-height: 100vh;
+        }
+
+        section:not(#home) {
+            padding: 2rem 0;
+        }
+
+        @media (min-width: 768px) {
+            section:not(#home) {
+                padding: 2.5rem 0;
+            }
+        }
+
+        /* Glass morphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Parallax effect on scroll */
+        .parallax {
+            transform: translateZ(0);
+            will-change: transform;
+        }
     </style>
     <script type="importmap">
     {

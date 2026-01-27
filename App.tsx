@@ -126,37 +126,72 @@ const App: React.FC = () => {
 
   return (
     <div className="relative min-h-screen">
+      {/* Page Progress Indicator */}
+      <div className="fixed top-0 left-0 right-0 h-1 bg-neutral-100 z-[110]">
+        <div 
+          className="h-full bg-black transition-all duration-300"
+          style={{
+            width: `${((['home', 'about', 'projects', 'certificates', 'services', 'contact'].indexOf(activeSection) + 1) / 6) * 100}%`
+          }}
+        />
+      </div>
+
+      {/* Section Navigation Dots */}
       <nav 
-        className="fixed bottom-6 left-1/2 -translate-x-1/2 lg:left-auto lg:right-12 lg:top-1/2 lg:-translate-y-1/2 lg:-translate-x-0 z-[100] flex lg:flex-col items-center gap-4 bg-white/80 backdrop-blur-2xl px-6 py-4 lg:py-8 lg:px-4 rounded-full border border-neutral-100 shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-500"
-        aria-label="Progress navigation"
+        className="fixed right-8 top-1/2 -translate-y-1/2 z-[100] hidden xl:flex flex-col items-end gap-4"
+        aria-label="Section navigation"
       >
-        {['home', 'about', 'projects', 'certificates', 'services', 'contact'].map((id) => {
-          const isActive = activeSection === id;
+        {[{id: 'home', num: '01'}, {id: 'about', num: '02'}, {id: 'projects', num: '03'}, {id: 'certificates', num: '04'}, {id: 'services', num: '05'}, {id: 'contact', num: '06'}].map((item) => {
+          const isActive = activeSection === item.id;
           return (
             <button 
-              key={id}
-              onClick={() => scrollTo(id)}
-              className="group relative flex items-center justify-center p-2 focus:outline-none rounded-full"
-              aria-label={`Scroll to ${id}`}
+              key={item.id}
+              onClick={() => scrollTo(item.id)}
+              className="group relative flex items-center gap-3 focus:outline-none"
+              aria-label={`Navigate to ${item.id}`}
             >
-              <div className={`transition-all duration-700 rounded-full ${isActive ? 'h-6 w-1.5 bg-black' : 'h-1.5 w-1.5 bg-neutral-200 group-hover:bg-neutral-500'}`} />
-              <span className={`absolute right-10 text-[10px] font-black uppercase tracking-[0.3em] hidden lg:block transition-all duration-500 whitespace-nowrap bg-black text-white px-3 py-1 rounded-md ${isActive ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'}`}>
-                {id}
+              <span className={`text-[10px] font-bold uppercase tracking-wider transition-all duration-300 ${
+                isActive ? 'opacity-100 text-black translate-x-0' : 'opacity-0 text-neutral-400 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0'
+              }`}>
+                {item.id}
               </span>
+              <div className="flex items-center gap-2">
+                <span className={`text-[9px] font-bold transition-all duration-300 ${
+                  isActive ? 'text-black' : 'text-neutral-300 group-hover:text-neutral-500'
+                }`}>
+                  {item.num}
+                </span>
+                <div className={`transition-all duration-500 rounded-full ${
+                  isActive ? 'w-2.5 h-2.5 bg-black scale-125' : 'w-2 h-2 bg-neutral-300 group-hover:bg-neutral-500 group-hover:scale-110'
+                }`} />
+              </div>
             </button>
           );
         })}
       </nav>
 
+      {/* Scroll Indicator (bottom) */}
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[90] hidden lg:flex flex-col items-center gap-2 text-neutral-400 hover:text-black transition-colors cursor-pointer"
+           onClick={() => {
+             const sections = ['home', 'about', 'projects', 'certificates', 'services', 'contact'];
+             const currentIndex = sections.indexOf(activeSection);
+             const nextSection = sections[Math.min(currentIndex + 1, sections.length - 1)];
+             scrollTo(nextSection);
+           }}>
+        <span className="text-[9px] font-bold uppercase tracking-[0.3em] rotate-90 origin-center whitespace-nowrap">Scroll</span>
+        <div className="w-[1px] h-12 bg-neutral-200 relative overflow-hidden">
+          <div className="w-full h-6 bg-black absolute top-0 animate-scroll" />
+        </div>
+      </div>
+
       <Navbar activeSection={activeSection} />
       
-      <main id="main-content">
+      <main id="main-content" className="scroll-smooth">
         <section id="home"><Hero /></section>
         <section id="about" className="reveal"><About /></section>
         <section id="projects" className="reveal">
           <Projects projects={githubProjects} loading={loading} />
         </section>
-        {/* Manifest section removed */}
         <section id="certificates" className="reveal"><Certificates /></section>
         <section id="services" className="reveal"><Services /></section>
         <section id="contact" className="reveal"><Contact /></section>

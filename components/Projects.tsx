@@ -228,9 +228,9 @@ const Projects: React.FC<ProjectsProps> = ({ projects, loading }) => {
             <div className="space-y-4">
               <div className="flex items-center gap-4">
                  <div className="w-12 h-[2px] bg-black" />
-                 <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-600">My Projects</h4>
+                 <h4 className="text-[10px] font-bold uppercase tracking-wider text-neutral-600">My Projects</h4>
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-black tracking-tight">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-black tracking-tight">
                 Live Deployments
               </h2>
               <div className="flex items-center gap-2">

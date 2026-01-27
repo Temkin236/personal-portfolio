@@ -210,9 +210,9 @@ const Certificates: React.FC = () => {
           <header className="mb-16 space-y-4">
             <div className="flex items-center gap-4">
               <div className="w-12 h-[2px] bg-black" />
-              <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-600">My Certifications</h4>
+              <h4 className="text-[10px] font-bold uppercase tracking-wider text-neutral-600">My Certifications</h4>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-black tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-black tracking-tight">
               Achievements
             </h2>
             <div className="flex items-center gap-2">
@@ -259,10 +259,10 @@ const Certificates: React.FC = () => {
             {certs.map((cert, index) => (
               <article
                 key={cert.id}
-                className="group relative flex-none w-80 sm:w-[420px] lg:w-[460px] flex flex-col"
+                className="group relative flex-none w-72 sm:w-80 lg:w-[340px] flex flex-col"
                 style={{ scrollSnapAlign: 'start' }}
               >
-                <div className="relative aspect-[4/5] overflow-hidden rounded-[3rem] sm:rounded-[4rem] lg:rounded-[5rem] bg-gradient-to-br from-neutral-50 to-white border-2 border-neutral-100 shadow-[0_8px_40px_rgba(0,0,0,0.04)] transition-all duration-[1.5s] ease-[var(--brand-ease)] hover:shadow-[0_60px_140px_rgba(0,0,0,0.12)] hover:-translate-y-8 hover:border-neutral-200">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-50 to-white border-2 border-neutral-100 shadow-sm transition-all duration-[1.2s] ease-[var(--brand-ease)] hover:shadow-xl hover:-translate-y-4 hover:border-neutral-200">
                   <img
                     src={cert.image}
                     alt={cert.title}

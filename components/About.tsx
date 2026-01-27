@@ -10,51 +10,51 @@ const experiences: Experience[] = [
 
 const About: React.FC = () => {
   return (
-    <div className="py-16 md:py-20 lg:py-32 px-6 sm:px-8 md:px-12 lg:px-24 xl:px-32 bg-white border-y border-neutral-100 overflow-hidden">
+    <div className="py-12 md:py-16 px-6 sm:px-8 md:px-12 lg:px-20 bg-white border-y border-neutral-100 overflow-hidden">
       <div className="max-w-5xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
-          <div className="lg:col-span-5 space-y-12">
-            <div className="space-y-8">
-              <div className="flex items-center gap-4">
-                <div className="w-8 h-8 rounded-full border border-black flex items-center justify-center">
-                  <span className="text-[10px] font-bold">01</span>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+          <div className="lg:col-span-5 space-y-6">
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-full border border-black flex items-center justify-center">
+                  <span className="text-[9px] font-bold">01</span>
                 </div>
-                <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-neutral-400">Biography</h4>
+                <h4 className="text-[9px] font-bold uppercase tracking-wider text-neutral-500">Biography</h4>
               </div>
-              <h2 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-black tracking-tighter leading-tight">
+              <h2 className="text-xl md:text-2xl lg:text-3xl font-heading font-bold text-black tracking-tight leading-tight">
                 Logic to <br /><span className="text-neutral-200">Scale.</span>
               </h2>
             </div>
-            <p className="text-lg md:text-xl text-neutral-500 leading-relaxed font-medium md:max-w-md lg:max-w-lg">
-              I am a <span className="text-black font-black">Full Stack Developer</span> with a core foundation as a <span className="italic">4th-year ECE candidate at ASTU</span>. I bridge the gap between complex hardware systems and elegant, user-centric software.
+            <p className="text-base md:text-lg text-neutral-500 leading-relaxed font-medium">
+              I am a <span className="text-black font-bold">Full Stack Developer</span> with a core foundation as a <span className="italic">4th-year ECE candidate at ASTU</span>.
             </p>
             
-            <div className="bg-neutral-50 p-6 rounded-3xl border border-neutral-100">
-               <p className="text-[9px] font-black uppercase text-neutral-400 tracking-[0.3em] mb-2">Technical Base</p>
-               <p className="font-heading font-bold text-xl">Full Stack & Agentic AI</p>
-               <p className="text-sm text-neutral-500 font-medium mt-1 italic">Building the next generation of web-driven AI solutions.</p>
+            <div className="bg-neutral-50 p-4 rounded-2xl border border-neutral-100">
+               <p className="text-[8px] font-bold uppercase text-neutral-400 tracking-wider mb-1">Technical Base</p>
+               <p className="font-heading font-bold text-base">Full Stack & Agentic AI</p>
+               <p className="text-xs text-neutral-500 font-medium mt-1">Building next-gen web AI solutions.</p>
             </div>
           </div>
 
-          <div className="lg:col-span-7 space-y-12">
-            <div className="flex justify-between items-center border-b border-neutral-100 pb-8">
-              <h4 className="text-[11px] font-black uppercase tracking-[0.5em] text-black">Chronology</h4>
+          <div className="lg:col-span-7 space-y-8">
+            <div className="flex justify-between items-center border-b border-neutral-100 pb-4">
+              <h4 className="text-[10px] font-bold uppercase tracking-wider text-black">Experience</h4>
               <div className="w-1.5 h-1.5 rounded-full bg-black"></div>
             </div>
 
-            <div className="relative mt-8">
-              <div className="hidden md:block absolute left-6 top-0 bottom-0 w-px bg-neutral-100"></div>
-              <div className="space-y-8">
+            <div className="relative mt-6">
+              <div className="hidden md:block absolute left-4 top-0 bottom-0 w-px bg-neutral-100"></div>
+              <div className="space-y-6">
                 {experiences.map((exp, idx) => (
-                  <div key={idx} className="group relative pl-0 md:pl-12 lg:pl-16">
-                    <div className="absolute md:left-2 lg:left-6 top-3 md:top-4 w-3 h-3 rounded-full bg-black"></div>
+                  <div key={idx} className="group relative pl-0 md:pl-10">
+                    <div className="absolute md:left-2 top-2 w-2 h-2 rounded-full bg-black"></div>
 
-                    <div className="md:ml-6">
-                      <span className="text-xs font-black text-neutral-300 uppercase tracking-widest">{exp.year}</span>
-                      <h3 className="text-2xl md:text-3xl lg:text-4xl font-heading font-bold transition-transform duration-500 group-hover:translate-x-3 mt-2">{exp.role}</h3>
-                      <p className="text-neutral-400 font-bold uppercase text-xs tracking-[0.3em] mt-1">{exp.company}</p>
+                    <div className="md:ml-4">
+                      <span className="text-[10px] font-bold text-neutral-300 uppercase tracking-wider">{exp.year}</span>
+                      <h3 className="text-lg md:text-xl font-heading font-bold transition-transform duration-500 group-hover:translate-x-2 mt-1">{exp.role}</h3>
+                      <p className="text-neutral-400 font-bold uppercase text-[9px] tracking-wider mt-1">{exp.company}</p>
 
-                      <p className="mt-3 md:mt-4 md:max-w-md text-neutral-500 font-medium text-sm leading-relaxed">
+                      <p className="mt-2 text-neutral-500 font-medium text-sm leading-relaxed">
                         {exp.description}
                       </p>
                     </div>

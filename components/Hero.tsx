@@ -17,9 +17,9 @@ const Hero: React.FC = () => {
         <div className="lg:col-span-7 z-10 space-y-6 md:space-y-8 lg:space-y-10 px-2 md:px-4 lg:px-6">
           <div className="space-y-5 md:space-y-6 lg:space-y-7">
             {/* Badge */}
-            <div className="flex items-center gap-4 lg:gap-6 reveal active">
-              <div className="w-12 lg:w-16 h-[2px] bg-gradient-to-r from-black to-neutral-300" />
-              <h2 className="text-[10px] lg:text-[11px] font-black tracking-[0.5em] text-black uppercase flex items-center gap-2">
+            <div className="flex items-center gap-3 lg:gap-4 reveal active">
+              <div className="w-10 lg:w-12 h-[2px] bg-gradient-to-r from-black to-neutral-300" />
+              <h2 className="text-[9px] lg:text-[10px] font-black tracking-[0.4em] text-black uppercase flex items-center gap-2">
                 <span className="inline-flex items-center gap-1">
                   <BrandReact className="w-3 h-3 opacity-70 group-hover:opacity-100 transition-opacity" aria-label="React" />
                   Software Engineering // Production Ready
@@ -28,7 +28,7 @@ const Hero: React.FC = () => {
             </div>
 
             {/* Main Title */}
-            <h1 className="text-[11vw] lg:text-[6.5rem] font-heading font-bold leading-[0.85] tracking-tighter text-black select-none group">
+            <h1 className="text-[8vw] lg:text-[4.5rem] font-heading font-bold leading-[0.9] tracking-tight text-black select-none group">
               TEMKIN<br />
               <span className="outline-text relative inline-block">
                 ABDULMELIK
@@ -37,9 +37,9 @@ const Hero: React.FC = () => {
             </h1>
 
             {/* Subtitle */}
-            <div className="flex flex-col sm:flex-row sm:items-start gap-4 md:gap-6 reveal active">
+            <div className="flex flex-col sm:flex-row sm:items-start gap-4 reveal active">
               <div className="max-w-xl px-1 md:px-2">
-                <p className="text-neutral-600 text-base lg:text-lg leading-relaxed font-medium">
+                <p className="text-neutral-600 text-sm lg:text-base leading-relaxed font-medium">
                   I am a developer merging technical precision with a modern aesthetic, crafting intelligent systems that push boundaries.
                 </p>
               </div>
@@ -47,10 +47,10 @@ const Hero: React.FC = () => {
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-wrap gap-3 md:gap-4 reveal active">
+          <div className="flex flex-wrap gap-3 reveal active">
             <button
               onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-              className="group relative px-6 md:px-8 py-3 md:py-4 bg-black text-white rounded-full font-bold text-[10px] uppercase tracking-[0.4em] transition-all hover:scale-105 active:scale-95 overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)]"
+              className="group relative px-5 md:px-6 py-2.5 md:py-3 bg-black text-white rounded-full font-bold text-[9px] uppercase tracking-[0.35em] transition-all hover:scale-105 active:scale-95 overflow-hidden shadow-lg"
             >
               <span className="relative z-10">View Projects</span>
               <div className="absolute inset-0 bg-neutral-800 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
@@ -58,7 +58,7 @@ const Hero: React.FC = () => {
             
             <button
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="group relative px-6 md:px-8 py-3 md:py-4 bg-white text-black rounded-full font-bold text-[10px] uppercase tracking-[0.4em] transition-all hover:scale-105 active:scale-95 border-2 border-black overflow-hidden"
+              className="group relative px-5 md:px-6 py-2.5 md:py-3 bg-white text-black rounded-full font-bold text-[9px] uppercase tracking-[0.35em] transition-all hover:scale-105 active:scale-95 border-2 border-black overflow-hidden"
             >
               <span className="relative z-10">Get In Touch</span>
               <div className="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
@@ -81,8 +81,8 @@ const Hero: React.FC = () => {
         </div>
 
         {/* Right Column - Profile Image */}
-        <div className="lg:col-span-5 relative group px-2 md:px-3 lg:px-4">
-          <div className="relative aspect-[3/4] overflow-hidden rounded-[3rem] bg-gradient-to-br from-neutral-900 to-black shadow-[0_60px_100px_-20px_rgba(0,0,0,0.35)] ring-1 ring-neutral-300 transition-all duration-1000 group-hover:shadow-[0_80px_120px_-30px_rgba(0,0,0,0.5)] group-hover:scale-[1.02]">
+        <div className="lg:col-span-5 relative group px-2 md:px-3">
+          <div className="relative aspect-[3/4] max-w-sm mx-auto overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-neutral-900 to-black shadow-[0_40px_80px_-20px_rgba(0,0,0,0.3)] ring-1 ring-neutral-300 transition-all duration-1000 group-hover:shadow-[0_50px_100px_-30px_rgba(0,0,0,0.4)] group-hover:scale-[1.02]">
             <img
               src={profilePic}
               alt="Temkin Abdulmelik"

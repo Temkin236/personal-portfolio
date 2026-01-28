@@ -7,17 +7,17 @@ const profilePic = `/assets/personalportfolio.png?${Date.now()}`;
 
 const Hero: React.FC = () => {
   return (
-    <div className="relative min-h-screen flex flex-col justify-center px-4 sm:px-8 md:px-12 lg:px-20 overflow-hidden pt-20 pb-12 bg-gradient-to-br from-neutral-50 via-white to-neutral-100">
+    <div className="relative min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-12 overflow-hidden pt-16 pb-8 bg-gradient-to-br from-neutral-50 via-white to-neutral-100">
       {/* Animated background elements */}
       <div className="absolute top-20 left-1/4 w-[50vw] h-[50vw] bg-neutral-100 rounded-full blur-[140px] -z-10 opacity-40 animate-pulse pointer-events-none" />
       <div className="absolute bottom-20 right-1/4 w-[40vw] h-[40vw] bg-neutral-50 rounded-full blur-[120px] -z-10 opacity-30 animate-float pointer-events-none" />
       
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center py-6 md:py-8">
+      <div className="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-center py-4">
         {/* Left Column - Content */}
-        <div className="lg:col-span-7 z-10 space-y-6 md:space-y-8 lg:space-y-10 px-2 md:px-4 lg:px-6">
-          <div className="space-y-5 md:space-y-6 lg:space-y-7">
+        <div className="lg:col-span-7 z-10 space-y-4 md:space-y-5 lg:space-y-6 px-2 md:px-3">
+          <div className="space-y-3 md:space-y-4">
             {/* Badge */}
-            <div className="flex items-center gap-3 lg:gap-4 reveal active">
+            <div className="flex items-center gap-2 lg:gap-3 reveal active">
               <div className="w-10 lg:w-12 h-[2px] bg-gradient-to-r from-black to-neutral-300" />
               <h2 className="text-[9px] lg:text-[10px] font-black tracking-[0.4em] text-black uppercase flex items-center gap-2">
                 <span className="inline-flex items-center gap-1">
@@ -28,7 +28,7 @@ const Hero: React.FC = () => {
             </div>
 
             {/* Main Title */}
-            <h1 className="text-[8vw] lg:text-[4.5rem] font-heading font-bold leading-[0.9] tracking-tight text-black select-none group">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold leading-tight tracking-tight text-black select-none group">
               TEMKIN<br />
               <span className="outline-text relative inline-block">
                 ABDULMELIK
@@ -37,9 +37,9 @@ const Hero: React.FC = () => {
             </h1>
 
             {/* Subtitle */}
-            <div className="flex flex-col sm:flex-row sm:items-start gap-4 reveal active">
-              <div className="max-w-xl px-1 md:px-2">
-                <p className="text-neutral-600 text-sm lg:text-base leading-relaxed font-medium">
+            <div className="flex flex-col sm:flex-row sm:items-start gap-2 reveal active">
+              <div className="max-w-xl">
+                <p className="text-neutral-600 text-sm leading-relaxed font-normal">
                   I am a developer merging technical precision with a modern aesthetic, crafting intelligent systems that push boundaries.
                 </p>
               </div>
@@ -47,10 +47,10 @@ const Hero: React.FC = () => {
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-wrap gap-3 reveal active">
+          <div className="flex flex-wrap gap-2 reveal active">
             <button
               onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-              className="group relative px-5 md:px-6 py-2.5 md:py-3 bg-black text-white rounded-full font-bold text-[9px] uppercase tracking-[0.35em] transition-all hover:scale-105 active:scale-95 overflow-hidden shadow-lg"
+              className="group relative px-4 md:px-5 py-2 md:py-2.5 bg-black text-white rounded-full font-bold text-[9px] uppercase tracking-[0.3em] transition-all hover:scale-105 active:scale-95 overflow-hidden shadow-lg"
             >
               <span className="relative z-10">View Projects</span>
               <div className="absolute inset-0 bg-neutral-800 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
@@ -58,7 +58,7 @@ const Hero: React.FC = () => {
             
             <button
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="group relative px-5 md:px-6 py-2.5 md:py-3 bg-white text-black rounded-full font-bold text-[9px] uppercase tracking-[0.35em] transition-all hover:scale-105 active:scale-95 border-2 border-black overflow-hidden"
+              className="group relative px-4 md:px-5 py-2 md:py-2.5 bg-white text-black rounded-full font-bold text-[9px] uppercase tracking-[0.3em] transition-all hover:scale-105 active:scale-95 border-2 border-black overflow-hidden"
             >
               <span className="relative z-10">Get In Touch</span>
               <div className="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
@@ -67,8 +67,8 @@ const Hero: React.FC = () => {
           </div>
 
           {/* Info Tags - Inspired by Joker layout */}
-          <div className="flex flex-wrap gap-3 lg:gap-4 reveal active">
-            <div className="bg-white/60 backdrop-blur-xl px-5 py-2 rounded-full border border-neutral-200 shadow-lg">
+          <div className="flex flex-wrap gap-2 reveal active">
+            <div className="bg-white/60 backdrop-blur-xl px-4 py-1.5 rounded-full border border-neutral-200 shadow-lg">
               <span className="text-[9px] font-black uppercase tracking-[0.3em] text-neutral-600">Intelligence</span>
             </div>
             <div className="bg-white/60 backdrop-blur-xl px-5 py-2 rounded-full border border-neutral-200 shadow-lg">
@@ -81,8 +81,8 @@ const Hero: React.FC = () => {
         </div>
 
         {/* Right Column - Profile Image */}
-        <div className="lg:col-span-5 relative group px-2 md:px-3">
-          <div className="relative aspect-[3/4] max-w-sm mx-auto overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-neutral-900 to-black shadow-[0_40px_80px_-20px_rgba(0,0,0,0.3)] ring-1 ring-neutral-300 transition-all duration-1000 group-hover:shadow-[0_50px_100px_-30px_rgba(0,0,0,0.4)] group-hover:scale-[1.02]">
+        <div className="lg:col-span-5 relative group">
+          <div className="relative aspect-[3/4] max-w-xs mx-auto overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-900 to-black shadow-xl ring-1 ring-neutral-300 transition-all duration-1000 group-hover:shadow-2xl group-hover:scale-[1.02]">
             <img
               src={profilePic}
               alt="Temkin Abdulmelik"

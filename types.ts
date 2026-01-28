@@ -21,6 +21,7 @@ export interface Certificate {
   description?: string;
   highlight?: string;
   technologies?: string[];
+  team?: string;
 }
 
 export interface Experience {

@@ -22,7 +22,7 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ pro
     <div className="fixed inset-0 z-[200] flex items-center justify-center px-4 sm:px-6 py-10 sm:py-14" role="dialog" aria-modal="true">
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300" onClick={onClose} />
       
-      <div className="relative w-full max-w-3xl max-h-[85vh] bg-white rounded-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300">
+      <div className="relative w-full max-w-3xl max-h-[85vh] bg-white rounded-2xl shadow-2xl animate-in zoom-in-95 duration-300 flex flex-col">
         <button 
           onClick={onClose}
           className="absolute top-4 right-4 z-30 w-10 h-10 rounded-full bg-neutral-100 hover:bg-neutral-200 flex items-center justify-center transition-colors"
@@ -31,7 +31,7 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ pro
           <svg className="w-5 h-5 text-neutral-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
         </button>
 
-        <div className="flex flex-col overflow-y-auto max-h-[90vh]">
+        <div className="flex flex-col overflow-y-auto flex-1">
           <div className="relative h-64 sm:h-80 overflow-hidden bg-neutral-100">
             <img 
               src={project.image} 
@@ -295,11 +295,11 @@ const Projects: React.FC<ProjectsProps> = ({ projects, loading }) => {
             {(githubProjects.length ? githubProjects : projects).map((project, index) => (
               <article 
                 key={project.id} 
-                className="group relative flex-none w-80 sm:w-[420px] lg:w-[460px] flex flex-col"
+                className="group relative flex-none w-72 sm:w-80 flex flex-col"
                 style={{ scrollSnapAlign: 'start' }}
               >
                 <div 
-                  className="relative aspect-[4/5] overflow-hidden rounded-[3rem] sm:rounded-[4rem] lg:rounded-[5rem] bg-gradient-to-br from-neutral-50 to-white border-2 border-neutral-100 shadow-[0_8px_40px_rgba(0,0,0,0.04)] transition-all duration-[1.5s] ease-[var(--brand-ease)] hover:shadow-[0_60px_140px_rgba(0,0,0,0.12)] hover:-translate-y-8 hover:border-neutral-200"
+                  className="relative aspect-[3/4] overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-50 to-white border border-neutral-200 shadow-lg transition-all duration-700 hover:shadow-xl hover:-translate-y-2 hover:border-neutral-300"
                 >
                   <img 
                     src={project.image} 
@@ -336,18 +336,18 @@ const Projects: React.FC<ProjectsProps> = ({ projects, loading }) => {
                   </div>
                 </div>
                 
-                <div className="mt-10 sm:mt-14 space-y-5 flex-grow px-4">
-                  <div className="flex items-center gap-4">
-                    <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse shadow-lg shadow-green-500/50" />
-                    <span className="text-[10px] font-black text-neutral-400 uppercase tracking-[0.5em]">{project.category}</span>
+                <div className="mt-6 space-y-3 flex-grow px-3">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                    <span className="text-xs font-semibold text-neutral-500 uppercase tracking-wide">{project.category}</span>
                   </div>
-                  <h3 className="text-3xl sm:text-4xl font-heading font-bold capitalize transition-all duration-700 group-hover:translate-x-3 group-hover:text-black leading-tight">{project.title}</h3>
-                  <p className="text-neutral-500 text-base font-medium line-clamp-2 leading-relaxed">{project.description}</p>
+                  <h3 className="text-xl sm:text-2xl font-heading font-semibold capitalize transition-all duration-500 leading-tight">{project.title}</h3>
+                  <p className="text-neutral-600 text-sm font-normal line-clamp-2 leading-relaxed">{project.description}</p>
                   
                   {/* Tags */}
-                  <div className="flex flex-wrap gap-3 pt-3">
+                  <div className="flex flex-wrap gap-2 pt-2">
                     {project.tags.slice(0, 3).map(tag => (
-                      <span key={tag} className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest px-4 py-2 bg-white border-2 border-neutral-100 rounded-full hover:border-black transition-colors duration-300 shadow-sm">
+                      <span key={tag} className="text-[9px] font-semibold text-neutral-500 uppercase tracking-wide px-3 py-1.5 bg-white border border-neutral-200 rounded-full hover:border-black transition-colors duration-300">
                         {tag}
                       </span>
                     ))}

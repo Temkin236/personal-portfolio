@@ -99,102 +99,123 @@ const CertificateModal: React.FC<{ cert: Certificate; onClose: () => void }> = (
   };
 
   return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center px-4 sm:px-6 py-10 sm:py-14" role="dialog" aria-modal="true">
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300" onClick={onClose} />
+    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 overflow-y-auto" role="dialog" aria-modal="true">
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-md transition-opacity duration-300" onClick={onClose} />
       
-      <div className="relative w-full max-w-3xl max-h-[85vh] bg-white rounded-2xl shadow-2xl animate-in zoom-in-95 duration-300 flex flex-col">
+      <div className="relative w-full max-w-4xl bg-white rounded-xl shadow-[0_20px_60px_rgba(0,0,0,0.3)] animate-in zoom-in-95 duration-300 flex flex-col my-8 min-h-[80vh] max-h-[90vh]">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-30 w-10 h-10 rounded-full bg-neutral-100 hover:bg-neutral-200 flex items-center justify-center transition-colors"
+          className="absolute top-5 right-5 z-30 w-11 h-11 rounded-full bg-white shadow-lg hover:shadow-xl hover:bg-gray-50 flex items-center justify-center transition-all duration-200 border border-gray-200"
           aria-label="Close"
         >
-          <svg className="w-5 h-5 text-neutral-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
 
-        <div className="flex flex-col overflow-y-auto flex-1">
-          <div className="relative h-64 sm:h-80 overflow-hidden bg-neutral-100">
-            <img 
-              src={cert.image} 
-              alt={cert.title} 
-              className="w-full h-full object-cover"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop";
-              }}
-            />
-          </div>
+        <div className="relative h-52 sm:h-64 flex-shrink-0 overflow-hidden rounded-t-xl bg-gradient-to-br from-gray-100 to-gray-200">
+          <img 
+            src={cert.image} 
+            alt={cert.title} 
+            className="w-full h-full object-contain p-4"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop";
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent pointer-events-none"></div>
+        </div>
 
-          <div className="p-6 sm:p-8 lg:p-10 space-y-6">
-            <div className="space-y-4">
-              <div className="flex items-center justify-between flex-wrap gap-3">
-                <span className="text-xs font-semibold text-neutral-500 uppercase tracking-wide">Certificate</span>
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                  <span className="text-xs font-medium text-green-600">Verified Certificate</span>
+        <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+          <div className="p-8 sm:p-10 lg:p-12 space-y-6">
+            <div className="space-y-5">
+            <div className="space-y-5">
+              <div className="flex items-center justify-between flex-wrap gap-4 pb-4 border-b-2 border-gray-100">
+                <span className="text-xs font-bold text-gray-500 uppercase tracking-wider bg-gray-100 px-3 py-1.5 rounded-full">Certificate of Achievement</span>
+                <div className="flex items-center gap-2 bg-green-50 px-3 py-1.5 rounded-full">
+                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                  <span className="text-xs font-semibold text-green-700">Verified</span>
                 </div>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-neutral-900 leading-tight">{cert.title}</h2>
-              <div className="flex flex-wrap gap-2">
-                {(cert.technologies || []).map(tech => (
-                  <span key={tech} className="text-xs font-medium text-neutral-600 px-3 py-1.5 bg-neutral-100 rounded-lg">{tech}</span>
-                ))}
+              
+              <div>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-3">{cert.title}</h2>
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {(cert.technologies || []).map(tech => (
+                    <span key={tech} className="text-xs font-semibold text-gray-700 px-4 py-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-full border border-gray-200 hover:border-gray-300 transition-colors">{tech}</span>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div className="border-t border-neutral-200 pt-6">
-              <div className="grid grid-cols-2 gap-4 mb-6">
-                <div>
-                  <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wide mb-1">Issuer</p>
-                  <p className="text-sm font-medium text-neutral-900">{cert.issuer}</p>
+            <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-6 border border-gray-200">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <p className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                    Issuer
+                  </p>
+                  <p className="text-base font-bold text-gray-900">{cert.issuer}</p>
                 </div>
-                <div>
-                  <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wide mb-1">Date</p>
-                  <p className="text-sm font-medium text-neutral-900">{cert.date}</p>
+                <div className="space-y-2">
+                  <p className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                    Date Issued
+                  </p>
+                  <p className="text-base font-bold text-gray-900">{cert.date}</p>
                 </div>
               </div>
+            </div>
 
               {cert.description && (
-                <div className="mb-4">
-                  <h3 className="text-sm font-semibold text-neutral-700 mb-2">About this certification</h3>
-                  <p className="text-neutral-600 text-base leading-relaxed">{cert.description}</p>
+                <div className="space-y-3">
+                  <h3 className="text-sm font-bold text-gray-800 uppercase tracking-wide flex items-center gap-2">
+                    <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    About This Certification
+                  </h3>
+                  <p className="text-gray-700 text-[15px] leading-relaxed">{cert.description}</p>
                 </div>
               )}
 
               {cert.highlight && (
-                <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded mb-4">
-                  <h3 className="text-sm font-semibold text-blue-900 mb-1">Key Achievement</h3>
-                  <p className="text-sm text-blue-800">{cert.highlight}</p>
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-600 p-5 rounded-r-lg shadow-sm">
+                  <h3 className="text-sm font-bold text-blue-900 mb-2 flex items-center gap-2">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                    Key Achievement
+                  </h3>
+                  <p className="text-sm text-blue-900 leading-relaxed">{cert.highlight}</p>
                 </div>
               )}
 
               {cert.team && (
-                <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded">
-                  <h3 className="text-sm font-semibold text-amber-900 mb-1">Team Collaborators</h3>
-                  <p className="text-sm text-amber-800">{cert.team}</p>
+                <div className="bg-gradient-to-r from-amber-50 to-orange-50 border-l-4 border-amber-600 p-5 rounded-r-lg shadow-sm">
+                  <h3 className="text-sm font-bold text-amber-900 mb-2 flex items-center gap-2">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" /></svg>
+                    Team Collaborators
+                  </h3>
+                  <p className="text-sm text-amber-900 leading-relaxed">{cert.team}</p>
                 </div>
               )}
-            </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
-              <button
-                onClick={handleDownload}
-                className="flex-1 text-center bg-neutral-900 text-white px-6 py-3 rounded-lg font-medium text-sm transition-all hover:bg-neutral-800 active:scale-[0.98] flex items-center justify-center gap-2"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-                Download Certificate
-              </button>
-              {cert.link && cert.link !== '#' && (
-                <a 
-                  href={cert.link} 
-                  target="_blank" 
-                  rel="noreferrer"
-                  className="flex-1 text-center bg-white text-neutral-900 border-2 border-neutral-200 px-6 py-3 rounded-lg font-medium text-sm transition-all hover:border-neutral-900 active:scale-[0.98] flex items-center justify-center gap-2"
+              <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t-2 border-gray-100">
+                <button
+                  onClick={handleDownload}
+                  className="flex-1 text-center bg-gradient-to-r from-gray-900 to-gray-800 text-white px-6 py-3.5 rounded-lg font-semibold text-sm transition-all hover:from-gray-800 hover:to-gray-700 active:scale-[0.98] flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                  View Certificate
-                </a>
-              )}
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                  Download Certificate
+                </button>
+                {cert.link && cert.link !== '#' && (
+                  <a 
+                    href={cert.link} 
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="flex-1 text-center bg-white text-gray-900 border-2 border-gray-300 px-6 py-3.5 rounded-lg font-semibold text-sm transition-all hover:bg-gray-50 hover:border-gray-900 active:scale-[0.98] flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                    View Certificate
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         </div>

@@ -131,7 +131,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects, loading }) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  // Fetch GitHub repos and filter READMEs for screenshots + deployed link
+  // Fetch GitHub repos (own repos, contributed repos, and starred repos)
   useEffect(() => {
     let mounted = true;
     const GITHUB_USER = 'Temkin236';
@@ -144,14 +144,14 @@ const Projects: React.FC<ProjectsProps> = ({ projects, loading }) => {
       try { return atob(b64.replace(/\n/g, '')); } catch { return '' }
     };
 
-    const findImage = (text: string, repoName: string, defaultBranch: string) => {
+    const findImage = (text: string, repoName: string, owner: string, defaultBranch: string) => {
       const mdImg = /!\[[^\]]*\]\(([^)]+)\)/i.exec(text);
       const htmlImg = /<img[^>]+src=["']([^"']+)["']/i.exec(text);
       const raw = mdImg?.[1] || htmlImg?.[1];
       if (!raw) return null;
       if (/^https?:\/\//i.test(raw)) return raw;
       const cleaned = raw.replace(/^\.\/?/, '').replace(/^\//, '');
-      return `https://raw.githubusercontent.com/${GITHUB_USER}/${repoName}/${defaultBranch}/${cleaned}`;
+      return `https://raw.githubusercontent.com/${owner}/${repoName}/${defaultBranch}/${cleaned}`;
     };
 
     const findDeployedLink = (text: string) => {
@@ -163,48 +163,121 @@ const Projects: React.FC<ProjectsProps> = ({ projects, loading }) => {
       return external || null;
     };
 
+    const processRepo = async (repo: any, isContributor: boolean = false, isStarred: boolean = false): Promise<Project | null> => {
+      if (!repo) return null;
+      
+      const owner = repo.owner?.login || GITHUB_USER;
+      const repoName = repo.name;
+      
+      try {
+        const r = await fetch(`https://api.github.com/repos/${owner}/${repoName}/readme`, { headers });
+        if (!r.ok) return null;
+        const readmeJson = await r.json();
+        const content = decode(readmeJson.content || '');
+
+        const image = findImage(content, repoName, owner, repo.default_branch || 'main');
+        const deployed = findDeployedLink(content);
+
+        if (image && deployed) {
+          const description = repo.description || (content.split('\n\n')[0] || '').replace(/[#>*`]/g, '').trim();
+          const tags = [repo.language || 'misc'];
+          if (isContributor && owner !== GITHUB_USER) tags.push('Contributed');
+          if (isStarred) tags.push('⭐ Starred');
+          
+          return {
+            id: String(repo.id),
+            title: repoName.replace(/[-_]/g, ' '),
+            category: `${repo.language || 'Project'}${isContributor && owner !== GITHUB_USER ? ' • Contributor' : ''}`,
+            description: description || 'Live deployment with README demo',
+            image,
+            tags,
+            githubUrl: repo.html_url,
+            deployedUrl: deployed,
+            stars: repo.stargazers_count || 0,
+          };
+        }
+      } catch (e) {
+        return null;
+      }
+      return null;
+    };
+
     (async () => {
       setFetchingGithub(true);
       try {
-        const res = await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100`, { headers });
-        if (!res.ok) return;
-        const repos = await res.json();
-
         const fetched: Project[] = [];
+        const processedIds = new Set<string>();
+        
+        // First, get all starred repo IDs for quick lookup
+        const starredRepoIds = new Set<string>();
+        const starredRes = await fetch(`https://api.github.com/users/${GITHUB_USER}/starred?per_page=100`, { headers });
+        if (starredRes.ok) {
+          const starredRepos = await starredRes.json();
+          starredRepos.forEach((repo: any) => starredRepoIds.add(String(repo.id)));
+        }
 
-        await Promise.all(repos.map(async (repo: any) => {
-          if (!repo || repo.fork) return;
-          try {
-            const r = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${repo.name}/readme`, { headers });
-            if (!r.ok) return;
-            const readmeJson = await r.json();
-            const content = decode(readmeJson.content || '');
-
-            const image = findImage(content, repo.name, repo.default_branch || 'main');
-            const deployed = findDeployedLink(content);
-
-            if (image && deployed) {
-              const description = repo.description || (content.split('\n\n')[0] || '').replace(/[#>*`]/g, '').trim();
-              fetched.push({
-                id: String(repo.id),
-                title: repo.name.replace(/[-_]/g, ' '),
-                category: repo.language || 'Project',
-                description: description || 'Live deployment with README demo',
-                image,
-                tags: [repo.language || 'misc'],
-                githubUrl: repo.html_url,
-                deployedUrl: deployed,
-                stars: repo.stargazers_count || 0,
-              });
+        // 1. Fetch and process user's own repositories
+        const ownReposRes = await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&sort=updated`, { headers });
+        if (ownReposRes.ok) {
+          const ownRepos = await ownReposRes.json();
+          const ownProjects = await Promise.all(
+            ownRepos
+              .filter((repo: any) => !repo.fork)
+              .map(async (repo: any) => {
+                const isStarred = starredRepoIds.has(String(repo.id));
+                return await processRepo(repo, false, isStarred);
+              })
+          );
+          ownProjects.forEach(proj => {
+            if (proj) {
+              fetched.push(proj);
+              processedIds.add(proj.id);
             }
-          } catch (e) {
-            return;
-          }
-        }));
+          });
+        }
 
-        if (mounted && fetched.length) setGithubProjects(fetched.sort((a,b) => (b.stars||0) - (a.stars||0)));
+        // 2. Fetch starred repos and check if user contributed to them
+        if (starredRes.ok) {
+          const starredRepos = await starredRes.json();
+          
+          const starredProjects = await Promise.all(
+            starredRepos.map(async (repo: any) => {
+              if (processedIds.has(String(repo.id))) return null; // Skip own repos
+              
+              // Check if user contributed to this starred repo
+              try {
+                const contribRes = await fetch(`https://api.github.com/repos/${repo.owner.login}/${repo.name}/contributors?per_page=100`, { headers });
+                let isContributor = false;
+                
+                if (contribRes.ok) {
+                  const contributors = await contribRes.json();
+                  isContributor = contributors.some((c: any) => c.login === GITHUB_USER);
+                }
+                
+                // Only include if user contributed to it
+                if (isContributor) {
+                  return await processRepo(repo, true, true);
+                }
+              } catch {
+                return null;
+              }
+              return null;
+            })
+          );
+          
+          starredProjects.forEach(proj => {
+            if (proj && !processedIds.has(proj.id)) {
+              fetched.push(proj);
+              processedIds.add(proj.id);
+            }
+          });
+        }
+
+        if (mounted && fetched.length) {
+          setGithubProjects(fetched.sort((a,b) => (b.stars||0) - (a.stars||0)));
+        }
       } catch (e) {
-        // silent fail
+        console.error('Error fetching GitHub projects:', e);
       } finally {
         if (mounted) setFetchingGithub(false);
       }

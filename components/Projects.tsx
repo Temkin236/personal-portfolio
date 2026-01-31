@@ -19,10 +19,10 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ pro
   }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center px-4 sm:px-6 py-10 sm:py-14" role="dialog" aria-modal="true">
+    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 overflow-y-auto" role="dialog" aria-modal="true">
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300" onClick={onClose} />
       
-      <div className="relative w-full max-w-3xl max-h-[85vh] bg-white rounded-2xl shadow-2xl animate-in zoom-in-95 duration-300 flex flex-col">
+      <div className="relative w-full max-w-3xl bg-white rounded-2xl shadow-2xl animate-in zoom-in-95 duration-300 flex flex-col my-8 min-h-[80vh] max-h-[90vh]">
         <button 
           onClick={onClose}
           className="absolute top-4 right-4 z-30 w-10 h-10 rounded-full bg-neutral-100 hover:bg-neutral-200 flex items-center justify-center transition-colors"
@@ -31,18 +31,18 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ pro
           <svg className="w-5 h-5 text-neutral-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
         </button>
 
-        <div className="flex flex-col overflow-y-auto flex-1">
-          <div className="relative h-64 sm:h-80 overflow-hidden bg-neutral-100">
-            <img 
-              src={project.image} 
-              alt={project.title} 
-              className="w-full h-full object-cover" 
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop";
-              }}
-            />
-          </div>
+        <div className="relative h-64 sm:h-80 flex-shrink-0 overflow-hidden rounded-t-2xl bg-neutral-100">
+          <img 
+            src={project.image} 
+            alt={project.title} 
+            className="w-full h-full object-cover" 
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop";
+            }}
+          />
+        </div>
 
+        <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
           <div className="p-6 sm:p-8 lg:p-10 space-y-6">
             <div className="space-y-4">
               <div className="flex items-center justify-between flex-wrap gap-3">
@@ -87,7 +87,7 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ pro
                 View on GitHub
               </a>
             </div>
-          </div>
+            </div>
         </div>
       </div>
     </div>

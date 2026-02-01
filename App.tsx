@@ -8,6 +8,7 @@ import Certificates from './components/Certificates';
 import Services from './components/Services';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import LoadingIndicator from './components/LoadingIndicator';
 import { Project } from './types';
 
 const FALLBACK_PROJECTS: Project[] = [
@@ -39,8 +40,29 @@ const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [githubProjects, setGithubProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  // Network status monitoring
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
 
   const fetchGithubProjects = useCallback(async () => {
+    if (!isOnline) {
+      setGithubProjects(FALLBACK_PROJECTS);
+      setLoading(false);
+      return;
+    }
+
     setLoading(true);
     try {
       const response = await fetch('https://api.github.com/users/temkin236/repos?sort=updated&per_page=30');
@@ -185,6 +207,8 @@ const App: React.FC = () => {
       </div>
 
       <Navbar activeSection={activeSection} />
+      
+      <LoadingIndicator isLoading={loading} isOffline={!isOnline} />
       
       <main id="main-content" className="scroll-smooth">
         <section id="home"><Hero /></section>

@@ -19,46 +19,59 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[100] px-6 py-6 lg:py-8 transition-all pointer-events-none">
-      <div className="max-w-7xl mx-auto flex items-center justify-between pointer-events-auto">
-        {/* Brand Identity */}
+    <header className="fixed top-0 left-0 right-0 z-[100] bg-neutral-900/80 backdrop-blur-lg border-b border-neutral-800/50">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        {/* Brand Logo */}
         <button 
           onClick={() => scrollTo('home')} 
-          className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-full pr-4"
-          aria-label="Temkin Home"
+          className="flex items-center gap-3 group focus:outline-none"
+          aria-label="Home"
         >
-          <div className="w-10 h-10 lg:w-12 lg:h-12 bg-black rounded-full flex items-center justify-center transition-transform group-hover:scale-110 duration-500 shadow-lg">
-            <span className="text-white font-black text-sm lg:text-base">T</span>
+          <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center transition-transform group-hover:scale-110 duration-300">
+            <span className="text-neutral-900 font-bold text-lg">T</span>
           </div>
         </button>
         
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-1 bg-white/60 backdrop-blur-xl px-2 py-2 rounded-full border border-neutral-200/50 shadow-lg">
+        <nav className="hidden lg:flex items-center gap-8">
           {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollTo(item.id)}
-              className={`relative px-6 py-2.5 text-sm font-medium transition-all duration-300 rounded-full ${
+              className={`text-sm font-medium transition-all duration-300 relative py-2 ${
                 activeSection === item.id
                   ? 'text-white'
-                  : 'text-neutral-600 hover:text-black'
+                  : 'text-neutral-400 hover:text-white'
               }`}
             >
-              {activeSection === item.id && (
-                <span className="absolute inset-0 bg-black rounded-full -z-10 transition-all duration-300" />
-              )}
               {item.label}
+              {activeSection === item.id && (
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-white transition-all duration-300" />
+              )}
             </button>
           ))}
         </nav>
         
-        {/* Mobile CTA */}
-        <button 
-          onClick={() => scrollTo('contact')}
-          className="lg:hidden bg-black hover:bg-neutral-800 text-white px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-lg"
-        >
-          Connect
-        </button>
+        {/* Right side buttons */}
+        <div className="flex items-center gap-4">
+          {/* Theme toggle (placeholder) */}
+          <button 
+            className="p-2 hover:bg-neutral-800 rounded-lg transition-colors text-neutral-400 hover:text-white"
+            aria-label="Toggle theme"
+          >
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          </button>
+
+          {/* CTA Button */}
+          <button 
+            onClick={() => scrollTo('contact')}
+            className="hidden sm:inline bg-white hover:bg-neutral-100 text-neutral-900 px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300"
+          >
+            Let's Talk
+          </button>
+        </div>
       </div>
     </header>
   );

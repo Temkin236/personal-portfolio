@@ -147,11 +147,11 @@ const App: React.FC = () => {
   }, [fetchGithubProjects]);
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen bg-neutral-900">
       {/* Page Progress Indicator */}
-      <div className="fixed top-0 left-0 right-0 h-1 bg-neutral-100 z-[110]">
+      <div className="fixed top-0 left-0 right-0 h-1 bg-neutral-800 z-[110]">
         <div 
-          className="h-full bg-black transition-all duration-300"
+          className="h-full bg-white transition-all duration-300"
           style={{
             width: `${((['home', 'about', 'projects', 'certificates', 'services', 'contact'].indexOf(activeSection) + 1) / 6) * 100}%`
           }}
@@ -173,18 +173,18 @@ const App: React.FC = () => {
               aria-label={`Navigate to ${item.id}`}
             >
               <span className={`text-[10px] font-bold uppercase tracking-wider transition-all duration-300 ${
-                isActive ? 'opacity-100 text-black translate-x-0' : 'opacity-0 text-neutral-400 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0'
+                isActive ? 'opacity-100 text-white translate-x-0' : 'opacity-0 text-neutral-500 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0'
               }`}>
                 {item.id}
               </span>
               <div className="flex items-center gap-2">
                 <span className={`text-[9px] font-bold transition-all duration-300 ${
-                  isActive ? 'text-black' : 'text-neutral-300 group-hover:text-neutral-500'
+                  isActive ? 'text-white' : 'text-neutral-600 group-hover:text-neutral-400'
                 }`}>
                   {item.num}
                 </span>
                 <div className={`transition-all duration-500 rounded-full ${
-                  isActive ? 'w-2.5 h-2.5 bg-black scale-125' : 'w-2 h-2 bg-neutral-300 group-hover:bg-neutral-500 group-hover:scale-110'
+                  isActive ? 'w-2.5 h-2.5 bg-white scale-125' : 'w-2 h-2 bg-neutral-700 group-hover:bg-neutral-500 group-hover:scale-110'
                 }`} />
               </div>
             </button>
@@ -193,7 +193,7 @@ const App: React.FC = () => {
       </nav>
 
       {/* Scroll Indicator (bottom) */}
-      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[90] hidden lg:flex flex-col items-center gap-2 text-neutral-400 hover:text-black transition-colors cursor-pointer"
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[90] hidden lg:flex flex-col items-center gap-2 text-neutral-500 hover:text-white transition-colors cursor-pointer"
            onClick={() => {
              const sections = ['home', 'about', 'projects', 'certificates', 'services', 'contact'];
              const currentIndex = sections.indexOf(activeSection);
@@ -201,8 +201,8 @@ const App: React.FC = () => {
              scrollTo(nextSection);
            }}>
         <span className="text-[9px] font-bold uppercase tracking-[0.3em] rotate-90 origin-center whitespace-nowrap">Scroll</span>
-        <div className="w-[1px] h-12 bg-neutral-200 relative overflow-hidden">
-          <div className="w-full h-6 bg-black absolute top-0 animate-scroll" />
+        <div className="w-[1px] h-12 bg-neutral-700 relative overflow-hidden">
+          <div className="w-full h-6 bg-white absolute top-0 animate-scroll" />
         </div>
       </div>
 

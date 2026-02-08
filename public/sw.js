@@ -1,3 +1,17 @@
+// If this service worker is running on localhost, unregister immediately
+try {
+  if (typeof self !== 'undefined' && self.registration && self.registration.scope) {
+    const scopeHost = new URL(self.registration.scope).hostname;
+    if (scopeHost === 'localhost' || scopeHost === '127.0.0.1') {
+      // best-effort: clear caches then unregister
+      if (typeof caches !== 'undefined') {
+        caches.keys().then(keys => Promise.all(keys.map(k => caches.delete(k)))).catch(() => {});
+      }
+      self.registration.unregister().catch(() => {});
+    }
+  }
+} catch (e) {}
+
 const CACHE_NAME = 'temkin-portfolio-v1';
 const RUNTIME_CACHE = 'temkin-runtime-v1';
 

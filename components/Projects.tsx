@@ -70,7 +70,7 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ pro
                 <a 
                   href={project.deployedUrl} 
                   target="_blank" 
-                  rel="noreferrer"
+                    className="w-full h-full object-cover filter grayscale brightness-50 contrast-90 transition-all duration-[1.8s] ease-[var(--brand-ease)] group-hover:grayscale-0 group-hover:scale-110 group-hover:brightness-100 group-hover:contrast-100"
                   className="flex-1 text-center bg-neutral-900 text-white px-6 py-3 rounded-lg font-medium text-sm transition-all hover:bg-neutral-800 active:scale-[0.98] flex items-center justify-center gap-2"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
@@ -380,6 +380,9 @@ const Projects: React.FC<ProjectsProps> = ({ projects, loading }) => {
                     className="w-full h-full object-cover grayscale opacity-90 transition-all duration-[1.8s] ease-[var(--brand-ease)] group-hover:grayscale-0 group-hover:scale-110 group-hover:opacity-100"
                     onError={(e) => { (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop"; }}
                   />
+
+                  {/* dark overlay until hover */}
+                  <div className="absolute inset-0 bg-black/60 opacity-100 group-hover:opacity-0 transition-opacity duration-700 pointer-events-none z-0" />
                   
                   {/* Project number indicator */}
                   <div className="absolute top-8 sm:top-10 left-8 sm:left-10 z-10">

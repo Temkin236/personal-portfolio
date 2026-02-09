@@ -328,9 +328,12 @@ const Certificates: React.FC = () => {
                   <img
                     src={cert.image}
                     alt={cert.title}
-                    className="w-full h-full object-cover grayscale opacity-90 transition-all duration-[1.8s] ease-[var(--brand-ease)] group-hover:grayscale-0 group-hover:scale-110 group-hover:opacity-100"
+                    className="w-full h-full object-cover filter grayscale brightness-50 contrast-90 transition-all duration-[1.8s] ease-[var(--brand-ease)] group-hover:grayscale-0 group-hover:scale-110 group-hover:brightness-100 group-hover:contrast-100"
                     onError={(e) => { (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop'; }}
                   />
+
+                  {/* dark overlay until hover */}
+                  <div className="absolute inset-0 bg-black/80 opacity-100 group-hover:opacity-0 transition-opacity duration-700 pointer-events-none z-0" />
 
                   <div className="absolute top-8 sm:top-10 left-8 sm:left-10 z-10">
                     <div className="w-12 h-12 rounded-full bg-white/95 backdrop-blur-lg flex items-center justify-center text-black font-bold text-base shadow-2xl border-2 border-white transition-all duration-500 group-hover:scale-110 group-hover:rotate-12">{String(index + 1).padStart(2, '0')}</div>

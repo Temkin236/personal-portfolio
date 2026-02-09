@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import personalPortrait from '../assets/personalportfolio.png';
 
 const GITHUB_USERNAME = 'temkin236';
 
 const Hero: React.FC = () => {
   const [avatar, setAvatar] = useState<string>('https://github.com/Temkin236.png');
   const [name, setName] = useState<string>('Temkin Abdulmelik');
+  const imgWrapperRef = useRef<HTMLDivElement | null>(null);
+  const [offset, setOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
   useEffect(() => {
     let cancelled = false;
@@ -20,6 +23,16 @@ const Hero: React.FC = () => {
       cancelled = true;
     };
   }, []);
+
+  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = e.currentTarget as HTMLDivElement;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width / 2) / 18; // small parallax
+    const y = (e.clientY - rect.top - rect.height / 2) / 22;
+    setOffset({ x, y });
+  };
+
+  const handleLeave = () => setOffset({ x: 0, y: 0 });
 
   return (
     <section className="min-h-screen bg-gray-50 flex items-center">
@@ -47,12 +60,35 @@ const Hero: React.FC = () => {
           {/* Right: refined portrait with nice rectangular framing */}
           <div className="md:col-span-6 order-1 md:order-2 flex justify-center md:justify-end">
             <div className="relative">
-              <div className="rounded-[40px] p-1 bg-gradient-to-br from-gray-200 to-gray-100 shadow-2xl">
-                <div className="rounded-[32px] overflow-hidden bg-white w-64 h-80 md:w-[420px] md:h-[520px]">
+              <div className="rounded-[44px] p-1 bg-gradient-to-br from-gray-200 to-gray-100 shadow-2xl">
+                <div
+                  ref={imgWrapperRef}
+                  onMouseMove={handleMove}
+                  onMouseLeave={handleLeave}
+                  className="relative group rounded-[36px] overflow-hidden bg-white w-64 h-80 md:w-[420px] md:h-[520px]"
+                  style={{
+                    transform: `translate(${offset.x}px, ${offset.y}px)`,
+                    transition: 'transform 360ms cubic-bezier(.2,.9,.2,1)',
+                    willChange: 'transform',
+                  }}
+                >
                   <img
-                    src={avatar}
+                    src={personalPortrait || avatar}
                     alt={name}
-                    className="w-full h-full object-cover transform transition-transform duration-500 hover:scale-105"
+                    className="w-full h-full object-cover filter grayscale brightness-60 contrast-95 transition-all duration-500 group-hover:grayscale-0 group-hover:brightness-100 group-hover:contrast-100"
+                    style={{ display: 'block' }}
+                  />
+
+                  {/* dark overlay until hover (lighter to reveal image) */}
+                  <div className="absolute inset-0 bg-black/50 opacity-100 group-hover:opacity-0 transition-opacity duration-500 pointer-events-none" />
+
+                  {/* soft vignette to make edges less visible */}
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0"
+                    style={{
+                      background: 'radial-gradient(closest-side, rgba(0,0,0,0) 60%, rgba(0,0,0,0.12) 100%)',
+                    }}
                   />
                 </div>
               </div>

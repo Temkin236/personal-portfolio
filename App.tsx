@@ -38,6 +38,8 @@ const FALLBACK_PROJECTS: Project[] = [
 
 const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState('home');
+  const [showProjects, setShowProjects] = useState(false);
+  const [showCertificates, setShowCertificates] = useState(false);
   const [githubProjects, setGithubProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -211,12 +213,17 @@ const App: React.FC = () => {
       <LoadingIndicator isLoading={loading} isOffline={!isOnline} />
       
       <main id="main-content" className="scroll-smooth">
-        <section id="home"><Hero /></section>
+        <section id="home"><Hero onOpenProjects={() => { setShowProjects(true); scrollTo('projects'); }} onOpenCertificates={() => { setShowCertificates(true); scrollTo('certificates'); }} projectsCount={githubProjects.length} /></section>
         <section id="about" className="reveal"><About /></section>
-        <section id="projects" className="reveal">
-          <Projects projects={githubProjects} loading={loading} />
-        </section>
-        <section id="certificates" className="reveal"><Certificates /></section>
+        {showProjects && (
+          <section id="projects" className="reveal">
+            <Projects projects={githubProjects} loading={loading} />
+          </section>
+        )}
+
+        {showCertificates && (
+          <section id="certificates" className="reveal"><Certificates /></section>
+        )}
         <section id="services" className="reveal"><Services /></section>
         <section id="contact" className="reveal"><Contact /></section>
       </main>

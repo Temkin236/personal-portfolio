@@ -262,15 +262,11 @@ const App: React.FC = () => {
       <main id="main-content" className="scroll-smooth">
         <section id="home"><Hero onOpenProjects={() => { navigate('/projects'); }} onOpenCertificates={() => { navigate('/certificates'); }} projectsCount={githubProjects.length} /></section>
         <section id="about" className="reveal"><About /></section>
-        {route.name === 'projects' && (
-          <section id="projects" className="reveal">
-            <Projects projects={githubProjects} loading={loading} navigate={navigate} />
-          </section>
-        )}
+        <section id="projects" className="reveal">
+          <Projects projects={githubProjects} loading={loading} navigate={navigate} />
+        </section>
 
-        {route.name === 'certificates' && (
-          <section id="certificates" className="reveal"><Certificates navigate={navigate} /></section>
-        )}
+        <section id="certificates" className="reveal"><Certificates navigate={navigate} /></section>
 
         {route.name === 'project' && (
           <section className="reveal">

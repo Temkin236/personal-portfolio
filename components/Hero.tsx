@@ -47,12 +47,12 @@ const Hero: React.FC<HeroProps> = ({ onOpenProjects, onOpenCertificates, project
           {/* Left: cleaner hero intro */}
           <div className="md:col-span-6 order-2 md:order-1">
             <div className="flex items-center justify-between">
-              <div className="text-sm text-gray-500">Frontend-focused · React · TypeScript</div>
+              <div className="text-sm text-gray-500">Full‑stack · React · TypeScript · Agentic AI</div>
               <div className="text-sm text-gray-500 hidden sm:block">Open for collaborations</div>
             </div>
 
             <h1 className="mt-10 md:mt-12 text-5xl md:text-[6rem] leading-tight font-bold text-gray-900">Hi, I&apos;m {name}</h1>
-            <p className="mt-4 text-gray-600 text-lg max-w-xl">I build accessible, performant web apps with thoughtful interfaces. I focus on React, TypeScript and Tailwind.</p>
+            <p className="mt-4 text-gray-600 text-lg max-w-xl">I design and ship modern, scalable web platforms and agentic AI systems — delivering end-to-end solutions from clean UIs to reliable backend services.</p>
 
             <div className="mt-6 flex flex-wrap gap-4">
               <button
@@ -112,7 +112,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenProjects, onOpenCertificates, project
 
               {/* caption / badge */}
               <div className="absolute left-2 -bottom-6 md:left-6 md:-bottom-8 bg-white/90 text-gray-800 px-3 py-1 rounded-lg text-sm">
-                {name} — Frontend Developer
+                {name} — Full‑Stack Engineer (web platforms & agentic AI)
               </div>
             </div>
 

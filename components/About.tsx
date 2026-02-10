@@ -10,82 +10,111 @@ const experiences: Experience[] = [
 
 const About: React.FC = () => {
   return (
-    <div className="py-16 sm:py-20 px-6 lg:px-20 bg-white border-y border-neutral-100 overflow-hidden">
-      <div className="max-w-5xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-          <div className="lg:col-span-5 space-y-6">
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-6 h-6 rounded-full border border-black flex items-center justify-center">
-                  <span className="text-[9px] font-bold">01</span>
+    <section id="about" className="py-16 sm:py-20 px-6 lg:px-20 bg-white border-y border-neutral-100">
+      <div className="max-w-6xl mx-auto">
+        <div className="mb-8">
+          <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-600">👋 About Me</h3>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          <div className="lg:col-span-7">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900">I’m Temkin Abdulmelik — Full‑Stack Developer & Agentic AI engineer</h2>
+
+            <div className="mt-4 text-neutral-600 space-y-4 text-base">
+              <p>I’m Temkin Abdulmelik, a Full-Stack Developer with a strong interest in building modern, scalable web applications and agentic AI systems.</p>
+
+              <p>I enjoy working across the entire development lifecycle — from crafting clean, responsive user interfaces to designing reliable backend services and intelligent AI workflows. I focus on writing maintainable code, learning fast, and delivering real value through technology.</p>
+
+              <p>I’m currently working on agentic AI projects, participating in hackathons, and continuously improving my skills by building production-ready applications. I’m a fast learner, adaptable to new tools and technologies, and comfortable working in dynamic, problem-driven environments.</p>
+            </div>
+
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="bg-neutral-50 p-4 rounded-lg border border-neutral-100">
+                <h4 className="text-sm font-semibold text-neutral-800">What I’m Focused On</h4>
+                <ul className="mt-3 text-sm text-neutral-600 space-y-2 list-disc list-inside">
+                  <li>Building full-stack web applications</li>
+                  <li>Developing agentic AI and intelligent systems</li>
+                  <li>Designing clean, scalable backend architectures</li>
+                  <li>Turning ideas into usable, real-world products</li>
+                </ul>
+              </div>
+
+              <div className="bg-neutral-50 p-4 rounded-lg border border-neutral-100">
+                <h4 className="text-sm font-semibold text-neutral-800">How I Work</h4>
+                <ul className="mt-3 text-sm text-neutral-600 space-y-2">
+                  <li>I learn fast and adapt quickly to new technologies.</li>
+                  <li>I value clean code, clarity, and consistency.</li>
+                  <li>I enjoy collaboration and problem-solving.</li>
+                  <li>I focus on building systems that scale and last.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <h4 className="text-sm font-semibold text-neutral-800">🎯 My Goal</h4>
+              <p className="mt-2 text-sm text-neutral-600">To grow as a full-stack engineer and AI developer by building impactful products, contributing to meaningful projects, and continuously pushing my technical and creative limits.</p>
+            </div>
+          </div>
+
+          <aside className="lg:col-span-5">
+            <div className="bg-white/50 border border-neutral-100 rounded-lg p-6 shadow-sm">
+              <h4 className="text-sm font-bold text-neutral-700">🛠 Tech Stack</h4>
+
+              <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
+                <div>
+                  <div className="font-semibold text-neutral-800">Frontend</div>
+                  <ul className="mt-2 text-neutral-600 space-y-1">
+                    <li>⚛️ React</li>
+                    <li>▲ Next.js</li>
+                    <li>🟦 TypeScript</li>
+                    <li>🎨 Tailwind CSS</li>
+                    <li>🧩 HTML5 & CSS3</li>
+                  </ul>
                 </div>
-                <h4 className="text-[9px] font-bold uppercase tracking-wider text-neutral-500">Biography</h4>
-              </div>
-              <h2 className="text-xl md:text-2xl lg:text-3xl font-heading font-bold text-black tracking-tight leading-tight">
-                Logic to <br /><span className="text-neutral-200">Scale.</span>
-              </h2>
-            </div>
-            <p className="text-base md:text-lg text-neutral-500 leading-relaxed font-medium">
-              I am a <span className="text-black font-bold">Full Stack Developer</span> with a core foundation as a <span className="italic">4th-year ECE candidate at ASTU</span>.
-            </p>
-            
-            <div className="bg-neutral-50 p-4 rounded-2xl border border-neutral-100">
-               <p className="text-[8px] font-bold uppercase text-neutral-400 tracking-wider mb-1">Technical Base</p>
-               <p className="font-heading font-bold text-base">Full Stack & Agentic AI</p>
-               <p className="text-xs text-neutral-500 font-medium mt-1">Building next-gen web AI solutions.</p>
-            </div>
-          </div>
 
-          <div className="lg:col-span-7 space-y-8">
-            <div className="flex justify-between items-center border-b border-neutral-100 pb-4">
-              <h4 className="text-[10px] font-bold uppercase tracking-wider text-black">Experience</h4>
-              <div className="w-1.5 h-1.5 rounded-full bg-black"></div>
-            </div>
+                <div>
+                  <div className="font-semibold text-neutral-800">Backend</div>
+                  <ul className="mt-2 text-neutral-600 space-y-1">
+                    <li>🟢 Node.js</li>
+                    <li>🚂 Express.js</li>
+                    <li>🍃 MongoDB</li>
+                    <li>🔗 REST APIs</li>
+                    <li>🔐 Auth & Authorization</li>
+                  </ul>
+                </div>
 
-            <div className="relative mt-6">
-              <div className="hidden md:block absolute left-4 top-0 bottom-0 w-px bg-neutral-100"></div>
-              <div className="space-y-6">
-                {experiences.map((exp, idx) => (
-                  <div key={idx} className="group relative pl-0 md:pl-10">
-                    <div className="absolute md:left-2 top-2 w-2 h-2 rounded-full bg-black"></div>
+                <div>
+                  <div className="font-semibold text-neutral-800">AI / Agentic</div>
+                  <ul className="mt-2 text-neutral-600 space-y-1">
+                    <li>🐍 Python</li>
+                    <li>🧠 Agentic AI Concepts</li>
+                    <li>🔄 AI Workflows & Automation</li>
+                    <li>🗂 Data Annotation & Preprocessing</li>
+                  </ul>
+                </div>
 
-                    <div className="md:ml-4">
-                      <span className="text-[10px] font-bold text-neutral-300 uppercase tracking-wider">{exp.year}</span>
-                      <h3 className="text-lg md:text-xl font-heading font-bold transition-transform duration-500 group-hover:translate-x-2 mt-1">{exp.role}</h3>
-                      <p className="text-neutral-400 font-bold uppercase text-[9px] tracking-wider mt-1">{exp.company}</p>
-
-                      <p className="mt-2 text-neutral-500 font-medium text-sm leading-relaxed">
-                        {exp.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                <div>
+                  <div className="font-semibold text-neutral-800">Tools</div>
+                  <ul className="mt-2 text-neutral-600 space-y-1">
+                    <li>🧰 Git & GitHub</li>
+                    <li>⚡ Vite</li>
+                    <li>🐳 Docker (basic)</li>
+                    <li>☁️ Vercel</li>
+                    <li>🖥 VS Code</li>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
+
+            <div className="mt-6 bg-neutral-50 p-4 rounded-lg border border-neutral-100 text-sm">
+              <div className="font-semibold text-neutral-800">✨ Short Version</div>
+              <p className="mt-2 text-neutral-600">I’m a full-stack developer working on modern web applications and agentic AI systems. I’m a fast learner, problem solver, and passionate about building scalable, real-world software.</p>
+            </div>
+          </aside>
         </div>
       </div>
-    </div>
+    </section>
   );
-    const [showAbout, setShowAbout] = useState(true);
-    const [showServices, setShowServices] = useState(false);
-    return (
-      <section id="about" className="about-section">
-        <button onClick={() => setShowAbout((v) => !v)} className="collapsible-btn">About Me</button>
-        {showAbout && (
-          <div className="collapsible-content">
-            <h2>About Me</h2>
-            <p>/* ...about content... */</p>
-          </div>
-        )}
-        <button onClick={() => setShowServices((v) => !v)} className="collapsible-btn">Services</button>
-        {showServices && (
-          <div className="collapsible-content">
-            {/* Services content here, previously from <Services /> */}
-          </div>
-        )}
-      </section>
-    );
 };
 
 export default About;

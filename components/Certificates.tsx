@@ -2,7 +2,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import type { Certificate } from '../types';
 
-const certs: Certificate[] = [
+export const certs: Certificate[] = [
   {
     id: 'c1',
     title: 'Full-Stack Web Development Bootcamp (CSEC ASTU)',
@@ -224,7 +224,12 @@ const CertificateModal: React.FC<{ cert: Certificate; onClose: () => void }> = (
   );
 };
 
-const Certificates: React.FC = () => {
+interface CertificatesExtras {
+  navigate?: (path: string) => void;
+  viewId?: string | undefined;
+}
+
+const Certificates: React.FC<CertificatesExtras> = ({ navigate, viewId }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
 
@@ -321,7 +326,15 @@ const Certificates: React.FC = () => {
             {certs.map((cert, index) => (
               <article
                 key={cert.id}
-                className="group relative flex-none w-72 sm:w-80 flex flex-col"
+                onClick={() => {
+                  console.log('Certificates: card clicked', cert.id);
+                  if (navigate) return navigate(`/certificates/${cert.id}`);
+                  setSelectedCert(cert);
+                }}
+                onKeyDown={(e) => { if (e.key === 'Enter') { if (navigate) return navigate(`/certificates/${cert.id}`); setSelectedCert(cert); } }}
+                role="button"
+                tabIndex={0}
+                className="group relative flex-none w-72 sm:w-80 flex flex-col cursor-pointer"
                 style={{ scrollSnapAlign: 'start' }}
               >
                 <div className="relative aspect-[3/4] overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-50 to-white border border-neutral-200 shadow-lg transition-all duration-700 hover:shadow-xl hover:-translate-y-2 hover:border-neutral-300">
@@ -401,7 +414,7 @@ const Certificates: React.FC = () => {
             </div>
           </div>
 
-          {selectedCert && (
+          {selectedCert && !navigate && (
             <CertificateModal cert={selectedCert} onClose={() => setSelectedCert(null)} />
           )}
         </div>

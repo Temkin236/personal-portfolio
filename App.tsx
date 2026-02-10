@@ -5,6 +5,9 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
 import Certificates from './components/Certificates';
+import ProjectPage from './components/ProjectPage';
+import CertificatePage from './components/CertificatePage';
+import { certs as ALL_CERTS } from './components/Certificates';
 import Services from './components/Services';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -40,6 +43,42 @@ const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [showProjects, setShowProjects] = useState(false);
   const [showCertificates, setShowCertificates] = useState(false);
+  const [route, setRoute] = useState<{ name: string; id?: string }>({ name: 'home' });
+
+  const parsePath = useCallback(() => {
+    const p = window.location.pathname.replace(/\/+$/, '');
+    if (p === '' || p === '/') return { name: 'home' };
+    const parts = p.split('/').filter(Boolean);
+    if (parts[0] === 'projects' && parts[1]) return { name: 'project', id: parts[1] };
+    if (parts[0] === 'projects') return { name: 'projects' };
+    if (parts[0] === 'certificates' && parts[1]) return { name: 'certificate', id: parts[1] };
+    if (parts[0] === 'certificates') return { name: 'certificates' };
+    return { name: 'home' };
+  }, []);
+
+  useEffect(() => {
+    setRoute(parsePath());
+    const onPop = () => setRoute(parsePath());
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, [parsePath]);
+
+  const navigate = useCallback((path: string) => {
+    window.history.pushState({}, '', path);
+    // derive route directly from the provided path to avoid timing issues
+    const p = path.replace(/\/+$/, '');
+    const parts = p.split('/').filter(Boolean);
+    let next = { name: 'home' } as { name: string; id?: string };
+    if (parts.length === 0) next = { name: 'home' };
+    else if (parts[0] === 'projects' && parts[1]) next = { name: 'project', id: parts[1] };
+    else if (parts[0] === 'projects') next = { name: 'projects' };
+    else if (parts[0] === 'certificates' && parts[1]) next = { name: 'certificate', id: parts[1] };
+    else if (parts[0] === 'certificates') next = { name: 'certificates' };
+
+    setRoute(next);
+    // ensure viewport is at top for the new page
+    window.scrollTo({ top: 0, left: 0 });
+  }, []);
   const [githubProjects, setGithubProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -82,9 +121,9 @@ const App: React.FC = () => {
       const data = await response.json();
       
       if (Array.isArray(data)) {
-        // Strictly filter for repositories that have a homepage (deployed)
+        // Include non-fork repos (don't require homepage) so more projects surface
         const filtered: Project[] = data
-          .filter((repo: any) => !repo.fork && repo.homepage)
+          .filter((repo: any) => !repo.fork)
           .map((repo: any) => ({
             id: repo.id.toString(),
             title: repo.name.replace(/-/g, ' ').replace(/_/g, ' '),
@@ -149,11 +188,11 @@ const App: React.FC = () => {
   }, [fetchGithubProjects]);
 
   return (
-    <div className="relative min-h-screen bg-neutral-900">
+    <div className="relative min-h-screen bg-gray-50">
       {/* Page Progress Indicator */}
-      <div className="fixed top-0 left-0 right-0 h-1 bg-neutral-800 z-[110]">
+      <div className="fixed top-0 left-0 right-0 h-1 bg-neutral-200 z-[110]">
         <div 
-          className="h-full bg-white transition-all duration-300"
+          className="h-full bg-slate-900 transition-all duration-300"
           style={{
             width: `${((['home', 'about', 'projects', 'certificates', 'services', 'contact'].indexOf(activeSection) + 1) / 6) * 100}%`
           }}
@@ -181,12 +220,12 @@ const App: React.FC = () => {
               </span>
               <div className="flex items-center gap-2">
                 <span className={`text-[9px] font-bold transition-all duration-300 ${
-                  isActive ? 'text-white' : 'text-neutral-600 group-hover:text-neutral-400'
+                  isActive ? 'text-slate-900' : 'text-neutral-500 group-hover:text-neutral-700'
                 }`}>
                   {item.num}
                 </span>
                 <div className={`transition-all duration-500 rounded-full ${
-                  isActive ? 'w-2.5 h-2.5 bg-white scale-125' : 'w-2 h-2 bg-neutral-700 group-hover:bg-neutral-500 group-hover:scale-110'
+                  isActive ? 'w-2.5 h-2.5 bg-slate-900 scale-125' : 'w-2 h-2 bg-neutral-300 group-hover:bg-neutral-400 group-hover:scale-110'
                 }`} />
               </div>
             </button>
@@ -203,26 +242,54 @@ const App: React.FC = () => {
              scrollTo(nextSection);
            }}>
         <span className="text-[9px] font-bold uppercase tracking-[0.3em] rotate-90 origin-center whitespace-nowrap">Scroll</span>
-        <div className="w-[1px] h-12 bg-neutral-700 relative overflow-hidden">
-          <div className="w-full h-6 bg-white absolute top-0 animate-scroll" />
+        <div className="w-[1px] h-12 bg-neutral-300 relative overflow-hidden">
+          <div className="w-full h-6 bg-slate-900 absolute top-0 animate-scroll" />
         </div>
       </div>
 
-      <Navbar activeSection={activeSection} />
+      <Navbar activeSection={activeSection} navigate={navigate} />
       
       <LoadingIndicator isLoading={loading} isOffline={!isOnline} />
       
+      {/* Debug overlay - temporary */}
+      <div className="fixed bottom-6 left-6 z-[120] bg-white/95 text-sm text-slate-900 p-3 rounded-lg border border-neutral-200 shadow-lg">
+        <div><strong>Route:</strong> {route.name}{route.id ? ` / ${route.id}` : ''}</div>
+        <div><strong>Path:</strong> {typeof window !== 'undefined' ? window.location.pathname : ''}</div>
+        <div><strong>Projects loaded:</strong> {githubProjects.length}</div>
+        <div className="mt-2 text-xs text-neutral-500">Click a CTA and watch URL + this box update.</div>
+      </div>
+      
       <main id="main-content" className="scroll-smooth">
-        <section id="home"><Hero onOpenProjects={() => { setShowProjects(true); scrollTo('projects'); }} onOpenCertificates={() => { setShowCertificates(true); scrollTo('certificates'); }} projectsCount={githubProjects.length} /></section>
+        <section id="home"><Hero onOpenProjects={() => { navigate('/projects'); }} onOpenCertificates={() => { navigate('/certificates'); }} projectsCount={githubProjects.length} /></section>
         <section id="about" className="reveal"><About /></section>
-        {showProjects && (
+        {route.name === 'projects' && (
           <section id="projects" className="reveal">
-            <Projects projects={githubProjects} loading={loading} />
+            <Projects projects={githubProjects} loading={loading} navigate={navigate} />
           </section>
         )}
 
-        {showCertificates && (
-          <section id="certificates" className="reveal"><Certificates /></section>
+        {route.name === 'certificates' && (
+          <section id="certificates" className="reveal"><Certificates navigate={navigate} /></section>
+        )}
+
+        {route.name === 'project' && (
+          <section className="reveal">
+            {(() => {
+              const id = route.id;
+              const project = githubProjects.find(p => String(p.id) === String(id)) || FALLBACK_PROJECTS.find(p => String(p.id) === String(id));
+              return project ? <ProjectPage project={project} onBack={() => navigate('/projects')} /> : <Projects projects={githubProjects} loading={loading} navigate={navigate} />;
+            })()}
+          </section>
+        )}
+
+        {route.name === 'certificate' && (
+          <section className="reveal">
+            {(() => {
+              const id = route.id;
+              const cert = ALL_CERTS.find(c => c.id === id);
+              return cert ? <CertificatePage cert={cert} onBack={() => navigate('/certificates')} /> : <Certificates navigate={navigate} />;
+            })()}
+          </section>
         )}
         <section id="services" className="reveal"><Services /></section>
         <section id="contact" className="reveal"><Contact /></section>

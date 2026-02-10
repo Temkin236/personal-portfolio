@@ -3,10 +3,14 @@ import React from 'react';
 
 interface NavbarProps {
   activeSection?: string;
+  navigate?: (path: string) => void;
 }
 
-const Navbar: React.FC<NavbarProps> = () => {
-  const scrollToContact = () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+const Navbar: React.FC<NavbarProps> = ({ navigate }) => {
+  const scrollToContact = () => {
+    if (navigate) return navigate('/contact');
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-[100] bg-white/95 border-b border-neutral-200 backdrop-blur-sm">

@@ -56,7 +56,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenProjects, onOpenCertificates, project
 
             <div className="mt-6 flex flex-wrap gap-4">
               <button
-                onClick={() => onOpenProjects && onOpenProjects()}
+                onClick={() => { console.log('Hero: open projects clicked'); onOpenProjects && onOpenProjects(); }}
                 className="inline-flex items-center gap-3 rounded-md bg-slate-900 text-white px-5 py-3 hover:bg-slate-800 transition"
               >
                 View projects
@@ -72,7 +72,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenProjects, onOpenCertificates, project
           </div>
 
           {/* Right: refined portrait with nice rectangular framing */}
-          <div className="md:col-span-6 order-1 md:order-2 flex justify-center md:justify-end">
+          <div className="md:col-span-6 order-1 md:order-2 flex flex-col items-center md:items-end gap-6">
             <div className="relative">
               <div className="rounded-[44px] p-1 bg-gradient-to-br from-gray-200 to-gray-100 shadow-none">
                 <div
@@ -116,38 +116,24 @@ const Hero: React.FC<HeroProps> = ({ onOpenProjects, onOpenCertificates, project
               </div>
             </div>
 
-            {/* Action cards for Projects / Certificates (professional + fancy) */}
-            <div className="mt-8 md:mt-10 flex gap-4 justify-start">
+            {/* Compact project/certificate buttons (replaces large cards) */}
+            <div className="mt-6 md:mt-8 flex gap-3">
               <button
-                onClick={() => onOpenProjects && onOpenProjects()}
-                className="group relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-800 to-neutral-900 text-white px-6 py-4 shadow-none hover:scale-[1.02] transition-transform duration-300"
+                onClick={() => { console.log('Hero: open projects clicked'); onOpenProjects && onOpenProjects(); }}
+                className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white border border-neutral-200 text-slate-900 font-semibold hover:shadow-sm transition"
                 aria-label="Open Projects"
               >
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-lg bg-white/10 flex items-center justify-center text-xl font-bold">
-                    {projectsCount}
-                  </div>
-                  <div className="text-left">
-                    <div className="text-sm font-medium opacity-80">Projects</div>
-                    <div className="text-xs opacity-70">Last synced: {new Date().toLocaleDateString()}</div>
-                  </div>
-                </div>
-                <span className="absolute -right-8 -top-8 w-28 h-28 rounded-full bg-white/5 blur-2xl pointer-events-none" />
+                <span className="inline-flex items-center justify-center w-6 h-6 rounded bg-slate-900 text-white text-sm font-bold">{projectsCount}</span>
+                <span>Projects</span>
               </button>
 
               <button
-                onClick={() => onOpenCertificates && onOpenCertificates()}
-                className="group relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-800 to-teal-900 text-white px-6 py-4 shadow-none hover:scale-[1.02] transition-transform duration-300"
+                onClick={() => { console.log('Hero: open certificates clicked'); onOpenCertificates && onOpenCertificates(); }}
+                className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white border border-neutral-200 text-slate-900 font-semibold hover:shadow-sm transition"
                 aria-label="Open Certificates"
               >
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-lg bg-white/10 flex items-center justify-center text-xl font-bold">6</div>
-                  <div className="text-left">
-                    <div className="text-sm font-medium opacity-80">Certificates</div>
-                    <div className="text-xs opacity-70">Latest: 2-11-2025</div>
-                  </div>
-                </div>
-                <span className="absolute -right-8 -top-8 w-28 h-28 rounded-full bg-white/5 blur-2xl pointer-events-none" />
+                <span className="inline-flex items-center justify-center w-6 h-6 rounded bg-slate-900 text-white text-sm font-bold">6</span>
+                <span>Certificates</span>
               </button>
             </div>
           </div>

@@ -67,11 +67,11 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ pro
             
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               {project.deployedUrl && (
-                <a 
-                  href={project.deployedUrl} 
-                  target="_blank" 
-                    className="w-full h-full object-cover filter grayscale brightness-50 contrast-90 transition-all duration-[1.8s] ease-[var(--brand-ease)] group-hover:grayscale-0 group-hover:scale-110 group-hover:brightness-100 group-hover:contrast-100"
-                  className="flex-1 text-center bg-neutral-900 text-white px-6 py-3 rounded-lg font-medium text-sm transition-all hover:bg-neutral-800 active:scale-[0.98] flex items-center justify-center gap-2"
+                <a
+                  href={project.deployedUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex-1 text-center bg-neutral-900 text-white px-6 py-3 rounded-lg font-medium text-sm transition-all hover:bg-neutral-800 active:scale-[0.98] flex items-center justify-center gap-2 filter grayscale brightness-50 contrast-90 duration-[1.8s] ease-[var(--brand-ease)] group-hover:grayscale-0 group-hover:scale-110 group-hover:brightness-100 group-hover:contrast-100"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                   View Live Site
@@ -87,14 +87,19 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({ pro
                 View on GitHub
               </a>
             </div>
-            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-const Projects: React.FC<ProjectsProps> = ({ projects, loading }) => {
+interface ProjectsExtras {
+  navigate?: (path: string) => void;
+  viewId?: string | undefined;
+}
+
+const Projects: React.FC<ProjectsProps & ProjectsExtras> = ({ projects, loading, navigate, viewId }) => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [githubProjects, setGithubProjects] = useState<Project[]>([]);
@@ -368,7 +373,15 @@ const Projects: React.FC<ProjectsProps> = ({ projects, loading }) => {
             {(githubProjects.length ? githubProjects : projects).map((project, index) => (
               <article 
                 key={project.id} 
-                className="group relative flex-none w-72 sm:w-80 flex flex-col"
+                onClick={() => {
+                  console.log('Projects: card clicked', project.id);
+                  if (navigate) return navigate(`/projects/${project.id}`);
+                  setSelectedProject(project);
+                }}
+                onKeyDown={(e) => { if (e.key === 'Enter') { if (navigate) return navigate(`/projects/${project.id}`); setSelectedProject(project); } }}
+                role="button"
+                tabIndex={0}
+                className="group relative flex-none w-72 sm:w-80 flex flex-col cursor-pointer"
                 style={{ scrollSnapAlign: 'start' }}
               >
                 <div 
@@ -451,12 +464,12 @@ const Projects: React.FC<ProjectsProps> = ({ projects, loading }) => {
         </div>
       </div>
 
-      {selectedProject && (
-        <ProjectModal 
-          project={selectedProject} 
-          onClose={() => setSelectedProject(null)} 
-        />
-      )}
+      {selectedProject && !navigate && (
+            <ProjectModal 
+              project={selectedProject} 
+              onClose={() => setSelectedProject(null)} 
+            />
+          )}
     </div>
   );
 };

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -12,6 +11,7 @@ import Services from './components/Services';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import LoadingIndicator from './components/LoadingIndicator';
+import AdminApp from './components/admin/AdminApp';
 import { Project } from './types';
 
 const FALLBACK_PROJECTS: Project[] = [
@@ -49,6 +49,7 @@ const App: React.FC = () => {
     const p = window.location.pathname.replace(/\/+$/, '');
     if (p === '' || p === '/') return { name: 'home' };
     const parts = p.split('/').filter(Boolean);
+    if (parts[0] === 'admin') return { name: 'admin' };
     if (parts[0] === 'projects' && parts[1]) return { name: 'project', id: parts[1] };
     if (parts[0] === 'projects') return { name: 'projects' };
     if (parts[0] === 'certificates' && parts[1]) return { name: 'certificate', id: parts[1] };
@@ -70,6 +71,7 @@ const App: React.FC = () => {
     const parts = p.split('/').filter(Boolean);
     let next = { name: 'home' } as { name: string; id?: string };
     if (parts.length === 0) next = { name: 'home' };
+    else if (parts[0] === 'admin') next = { name: 'admin' };
     else if (parts[0] === 'projects' && parts[1]) next = { name: 'project', id: parts[1] };
     else if (parts[0] === 'projects') next = { name: 'projects' };
     else if (parts[0] === 'certificates' && parts[1]) next = { name: 'certificate', id: parts[1] };
@@ -260,38 +262,19 @@ const App: React.FC = () => {
       </div>
       
       <main id="main-content" className="scroll-smooth">
-        <section id="home"><Hero onOpenProjects={() => { navigate('/projects'); }} onOpenCertificates={() => { navigate('/certificates'); }} projectsCount={githubProjects.length} /></section>
-        <section id="about" className="reveal"><About /></section>
-        <section id="projects" className="reveal">
-          <Projects projects={githubProjects} loading={loading} navigate={navigate} />
-        </section>
-
-        <section id="certificates" className="reveal"><Certificates navigate={navigate} /></section>
-
-        {route.name === 'project' && (
-          <section className="reveal">
-            {(() => {
-              const id = route.id;
-              const project = githubProjects.find(p => String(p.id) === String(id)) || FALLBACK_PROJECTS.find(p => String(p.id) === String(id));
-              return project ? <ProjectPage project={project} onBack={() => navigate('/projects')} /> : <Projects projects={githubProjects} loading={loading} navigate={navigate} />;
-            })()}
-          </section>
+        {route.name === 'admin' ? (
+          <div id="admin-root"><AdminApp /></div>
+        ) : (
+          <>
+            <section id="home"><Hero onOpenProjects={() => { navigate('/projects'); }} onOpenCertificates={() => { navigate('/certificates'); }} projectsCount={githubProjects.length} /></section>
+            <section id="about" className="reveal"><About /></section>
+            <section id="projects" className="reveal">
+              <Projects projects={githubProjects} loading={loading} navigate={navigate} />
+            </section>
+            <section id="certificates" className="reveal"><Certificates navigate={navigate} /></section>
+          </>
         )}
-
-        {route.name === 'certificate' && (
-          <section className="reveal">
-            {(() => {
-              const id = route.id;
-              const cert = ALL_CERTS.find(c => c.id === id);
-              return cert ? <CertificatePage cert={cert} onBack={() => navigate('/certificates')} /> : <Certificates navigate={navigate} />;
-            })()}
-          </section>
-        )}
-        <section id="services" className="reveal"><Services /></section>
-        <section id="contact" className="reveal"><Contact /></section>
       </main>
-
-      <Footer />
     </div>
   );
 };

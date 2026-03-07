@@ -1,12 +1,6 @@
-
 import React from 'react';
 import { Experience } from '../types';
-
-const experiences: Experience[] = [
-  { year: '2021 — 2025', role: 'Full Stack Engineering Focus', company: 'ASTU (ECE Foundation)', description: 'Leveraging Electronics principles to build high-performance software and autonomous agents.' },
-  { year: '2023 — Present', role: 'Core Software Lead', company: 'CSEC ASTU', description: 'Architecting scalable web solutions and automation tools for the university tech community.' },
-  { year: '2024 — Present', role: 'Data Annotation Specialist', company: 'AI Workflows', description: 'Designing high-precision annotation pipelines for fine-tuning large language models.' }
-];
+import './About.css'; // Add a new CSS file for animations and typography
 
 const About: React.FC = () => {
   return (
@@ -29,7 +23,7 @@ const About: React.FC = () => {
             </div>
 
             <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="bg-neutral-50 p-4 rounded-lg border border-neutral-100">
+              <div className="bg-neutral-50 p-4 rounded-lg border border-neutral-100 hover:shadow-lg transition-transform transform hover:-translate-y-1">
                 <h4 className="text-sm font-semibold text-neutral-800">What I’m Focused On</h4>
                 <ul className="mt-3 text-sm text-neutral-600 space-y-2 list-disc list-inside">
                   <li>Building full-stack web applications</li>
@@ -39,7 +33,7 @@ const About: React.FC = () => {
                 </ul>
               </div>
 
-              <div className="bg-neutral-50 p-4 rounded-lg border border-neutral-100">
+              <div className="bg-neutral-50 p-4 rounded-lg border border-neutral-100 hover:shadow-lg transition-transform transform hover:-translate-y-1">
                 <h4 className="text-sm font-semibold text-neutral-800">How I Work</h4>
                 <ul className="mt-3 text-sm text-neutral-600 space-y-2">
                   <li>I learn fast and adapt quickly to new technologies.</li>

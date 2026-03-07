@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import type { Certificate } from '../types';
 
@@ -386,9 +385,12 @@ const Certificates: React.FC<CertificatesExtras> = ({ navigate, viewId }) => {
                     ))}
                   </div>
 
-                  <div className="flex items-center justify-between pt-4">
+                  <div className="flex items-center justify-between pt-4" style={{ marginTop: 'auto' }}>
                     <button 
-                      onClick={() => setSelectedCert(cert)} 
+                      onClick={(e) => {
+                        e.preventDefault(); // Prevent default link behavior
+                        setSelectedCert(cert);
+                      }} 
                       className="text-sm font-bold text-neutral-700 hover:text-black transition-colors duration-300 underline underline-offset-4"
                     >
                       View Details

@@ -272,6 +272,8 @@ const App: React.FC = () => {
               <Projects projects={githubProjects} loading={loading} navigate={navigate} />
             </section>
             <section id="certificates" className="reveal"><Certificates navigate={navigate} /></section>
+            <section id="services" className="reveal"><Services /></section>
+            <section id="contact" className="reveal"><Contact /></section>
           </>
         )}
       </main>

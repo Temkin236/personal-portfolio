@@ -1,0 +1,16 @@
+/* Outlined text style for the user's name */
+.text {
+  /* 1. Make the inside of the letters transparent */
+  color: transparent; 
+
+  /* 2. Add the thin black outline (the magic part) */
+  -webkit-text-stroke: 1px #000; 
+
+  /* 3. Make it taller and bolder like the first image */
+  font-family: 'Bebas Neue', sans-serif; 
+  font-weight: 900;
+  text-transform: uppercase;
+
+  /* 4. Tighten the letters so they look professional */
+  letter-spacing: -2px; 
+}

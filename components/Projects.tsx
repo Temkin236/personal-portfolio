@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Project } from '../types';
 
@@ -409,7 +408,10 @@ const Projects: React.FC<ProjectsProps & ProjectsExtras> = ({ projects, loading,
 
                   <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-12 group-hover:translate-y-0">
                     <button 
-                      onClick={() => setSelectedProject(project)}
+                      onClick={(e) => {
+                        e.preventDefault(); // Prevent default link behavior
+                        setSelectedProject(project);
+                      }} 
                       className="relative px-10 sm:px-12 py-6 sm:py-7 bg-black text-white rounded-full shadow-2xl flex flex-col items-center gap-2 group/btn overflow-hidden active:scale-95 border-2 border-white/20 backdrop-blur-sm"
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-neutral-800 via-neutral-700 to-neutral-800 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500" />
